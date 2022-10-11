@@ -13,16 +13,21 @@ void ShotNormal::start(Vec2 pos)
 	/*m_vec.x = kShotSpeed;
 	m_vec.y = 0.0f;*/
 	m_vec.x = 0.0f;
-	m_vec.y = -kShotSpeed;
+	m_vec.y = kShotSpeed;  //ã•ûŒü‚É”­Ë
 }
 
 void ShotNormal::update()
 {
 	if (!m_isExist)return;
-	m_pos += m_vec;
+	m_pos -= m_vec;
 
-	if (m_pos.x > Game::kScreenWidth)
+	//‰æ–ÊŠO‚És‚Á‚½ê‡
+	if (m_pos.y < 0)
 	{
 		m_isExist = false;
 	}
+	/*if (m_pos.x < 0)
+	{
+		m_isExist = false;
+	}*/
 }

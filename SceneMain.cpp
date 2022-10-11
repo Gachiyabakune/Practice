@@ -16,6 +16,7 @@ SceneMain::SceneMain()
 	m_hPlayerGraphic = -1;
 	m_hShotGraphic = -1;
 	m_hTestSound = -1;
+	m_backImg = -1;
 }
 SceneMain::~SceneMain()
 {
@@ -27,6 +28,7 @@ void SceneMain::init()
 {
 	m_hPlayerGraphic = LoadGraph("data/player.bmp");
 	m_hShotGraphic = LoadGraph("data/shot.bmp");
+	//m_backImg = LoadGraph("data/img.png");
 
 	//サウンドのロード
 	m_hTestSound = LoadSoundMem("sound/cursor0.mp3");
@@ -48,6 +50,7 @@ void SceneMain::end()
 	//グラフィックアンロード
 //	DeleteGraph(m_hPlayerGraphic);
 	DeleteGraph(m_hShotGraphic);
+	//DeleteGraph(m_backImg);
 	//サウンドアンロード
 	DeleteSoundMem(m_hTestSound);
 
@@ -108,6 +111,7 @@ void SceneMain::update()
 // 毎フレームの描画
 void SceneMain::draw()
 {
+	//DrawGraph(0, 0, m_backImg, false);
 	m_player.draw();
 
 	for (auto& pShot : m_pShotVt)
@@ -115,7 +119,6 @@ void SceneMain::draw()
 		assert(pShot);
 		pShot->draw();
 	}
-
 	//現在存在している弾の数を表示
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "弾の数:%d", m_pShotVt.size());
 }

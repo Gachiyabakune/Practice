@@ -10,8 +10,8 @@ namespace
 	constexpr int kBoundMax = 3;
 
 	//グラフィックデータのサイズ
-	constexpr int kSizeX = 16;
-	constexpr int kSizeY = 16;
+	constexpr int kSizeX = 64;
+	constexpr int kSizeY = 64;
 }
 
 void ShotBound::start(Vec2 pos)
@@ -36,7 +36,7 @@ void ShotBound::update()
 	if (m_boundCount < kBoundMax)
 	{
 		//画面端での反射
-		if (m_pos.x < 0.0f)
+		if (m_pos.x < -32)
 		{
 			m_pos.x = 0.0f;
 			m_vec.x *= -1.0f;

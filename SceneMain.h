@@ -30,6 +30,7 @@ private:
 	// プレイヤーのグラフィックハンドル
 	int m_hPlayerGraphic;
 	int m_hShotGraphic;
+	int m_backImg;
 	// プレイヤー
 	Player m_player;
 	// ショット
