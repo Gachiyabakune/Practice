@@ -10,8 +10,10 @@ void ShotNormal::start(Vec2 pos)
 {
 	ShotBase::start(pos);
 
-	m_vec.x = kShotSpeed;
-	m_vec.y = 0.0f;
+	/*m_vec.x = kShotSpeed;
+	m_vec.y = 0.0f;*/
+	m_vec.x = 0.0f;
+	m_vec.y = -kShotSpeed;
 }
 
 void ShotNormal::update()
