@@ -40,7 +40,7 @@ void Player::init()
 
 	m_animeNo = 0;
 	m_animeFrame = 0;
-	m_motion = 0;
+	m_motion = 3;
 	m_shotInterval = 0;
 }
 
