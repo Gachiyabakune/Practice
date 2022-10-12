@@ -119,6 +119,16 @@ void Player::update()
 		isKey = true;
 		if (m_pos.x > Game::kScreenWidth - kGraphicSizeX)  m_pos.x = Game::kScreenWidth - kGraphicSizeX;	 //画面外に行かないように
 	}
+	//左上方向に進むなら向きを上方向を優先する
+	if (padState & PAD_INPUT_UP && padState & PAD_INPUT_RIGHT)
+	{
+		m_motion = 3;
+	}
+	//右上方向に進むなら向きを上方向を優先する
+	if (padState & PAD_INPUT_UP && padState & PAD_INPUT_LEFT)
+	{
+		m_motion = 3;
+	}
 	//キャラクターのアニメーション
 	if (isKey) m_animeFrame++;
 
