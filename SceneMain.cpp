@@ -39,7 +39,7 @@ void SceneMain::init()
 		Player::kGraphicDivX, Player::kGraphicDivY,
 		Player::kGraphicSizeX, Player::kGraphicSizeY, m_hPlayerGraphic);
 
-	m_hShotGraphic = LoadGraph("data/shot.bmp");
+	m_hShotGraphic = LoadGraph("data/ice.png");
 	m_hEnemyGraphic = LoadGraph("data/kumomitu.png");
 
 	//サウンドのロード
@@ -83,6 +83,10 @@ void SceneMain::end()
 	}
 }
 
+//void SceneMain::count()
+//{
+//	m_count++;
+//}
 // 毎フレームの処理
 void SceneMain::update()
 {
@@ -120,7 +124,7 @@ void SceneMain::draw()
 {
 	m_backImg.draw();
 	m_player.draw();
-	//m_enemy.draw();
+	m_enemy.draw();
 
 	for (auto& pShot : m_pShotVt)
 	{
@@ -129,6 +133,7 @@ void SceneMain::draw()
 	}
 	//現在存在している弾の数を表示
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "弾の数:%d", m_pShotVt.size());
+	//DrawFormatString(0, 50, GetColor(255, 255, 255), "カウント数:%d", m_count);
 }
 
 bool SceneMain::createShotNormal(Vec2 pos)

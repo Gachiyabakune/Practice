@@ -10,5 +10,4 @@ namespace Game
 	constexpr int kScreenHight = 820;
 	//カラーモード
 	constexpr int kColorDepth = 32;   //32 or 16
-
 };

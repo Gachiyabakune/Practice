@@ -17,6 +17,7 @@ public:
 	// 終了処理
 	void end();
 
+	//void count();
 	// 毎フレームの処理
 	void update();
 	// 毎フレームの描画
@@ -33,6 +34,7 @@ private:
 	int m_hPlayerGraphic[Player::kGraphicDivNum];
 	int m_hShotGraphic;
 	int m_hEnemyGraphic;
+	
 	// プレイヤー
 	Player m_player;
 	//敵
@@ -43,4 +45,6 @@ private:
 	std::vector<ShotBase*> m_pShotVt;
 	//サウンドハンドル
 	int m_hTestSound;
+
+	//int m_count;
 };

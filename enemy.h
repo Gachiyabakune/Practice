@@ -39,4 +39,12 @@ private:
 	Vec2 m_vec;
 
 	int m_shotInterval;
+
+	int m_count;
+
+	int m_time, m_stopTime, m_outTime;
+
+	int count;
+
+	bool endFlag;
 };
