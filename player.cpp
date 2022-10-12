@@ -6,16 +6,22 @@
 
 namespace
 {
-	// X方向、Y方向の最大速度
-	constexpr float kSpeedMax = 8.0f;
-	constexpr float kAcc = 0.4f;
 	//ショットの発射間隔
 	constexpr float kShotInterval = 16;
+
+	//キャラクターアニメーション
+	constexpr int kAnimeChangeFrame = 8;
 }
 
 Player::Player()
 {
-	m_handle = -1;
+	//初期化
+	for (auto& handle : m_handle)
+	{
+		handle = -1;
+	}
+	m_animeNo = 0;
+	m_motion = 0;
 	m_pMain = nullptr;
 	m_shotInterval = 0;
 }
@@ -27,10 +33,14 @@ Player::~Player()
 
 void Player::init()
 {
-	m_pos.x = 100.0f;
-	m_pos.y = 100.0f;
+	m_pos.x = Game::kScreenWidth / 2 - kGraphicSizeX / 2;
+	m_pos.y = 574;		//キャラの位置が画面比の７：３
 	m_vec.x = 0.0f;
 	m_vec.y = 0.0f;
+
+	m_animeNo = 0;
+	m_animeFrame = 0;
+	m_motion = 0;
 	m_shotInterval = 0;
 }
 
@@ -45,66 +55,84 @@ void Player::update()
 
 	if (m_shotInterval <= 0)
 	{
+		//普通の弾
 		if (padState & PAD_INPUT_1)
 		{
 			if (m_pMain->createShotNormal(getPos()))
 			{
 				m_shotInterval = kShotInterval;
-//				PlaySoundMem(m_hShotSe, DX_PLAYTYPE_BACK, true);
+				//PlaySoundMem(m_hShotSe, DX_PLAYTYPE_BACK, true);
 			}
 		}
+		//バウンド弾
 		if (padState & PAD_INPUT_2)
 		{
 			if (m_pMain->createShotBound(getPos()))
 			{
 				m_shotInterval = kShotInterval;
-//				PlaySoundMem(m_hShotSe, DX_PLAYTYPE_BACK, true);
+				//PlaySoundMem(m_hShotSe, DX_PLAYTYPE_BACK, true);
 			}
 		}
-		if (padState & PAD_INPUT_3)
-		{
-			if (m_pMain->createShotFall(getPos()))
-			{
-				m_shotInterval = kShotInterval;
-//				PlaySoundMem(m_hShotSe, DX_PLAYTYPE_BACK, true);
-			}
-		}
+		//改修中
+//		if (padState & PAD_INPUT_3)
+//		{
+//			if (m_pMain->createShotFall(getPos()))
+//			{
+//				m_shotInterval = kShotInterval;
+////				PlaySoundMem(m_hShotSe, DX_PLAYTYPE_BACK, true);
+//			}
+//		}
 	}
 
-	
+	//キャラの移動処理---------------------------------------------
+	bool isKey = false;
 
+	//上方向
 	if (padState & PAD_INPUT_UP)
 	{
-		m_vec.y -= kAcc;
-		if (m_vec.y < -kSpeedMax)	m_vec.y = -kSpeedMax;
+		m_pos.y--;
+		m_motion = 3;
+		isKey = true;
+		if (m_pos.y < 0)   m_pos.y = 0;    //画面外に行かないように
 	}
-	else if (padState & PAD_INPUT_DOWN)
+	//下方向
+	if (padState & PAD_INPUT_DOWN)
 	{
-		m_vec.y += kAcc;
-		if (m_vec.y > kSpeedMax)	m_vec.y = kSpeedMax;
+		m_pos.y++;
+		m_motion = 0;
+		isKey = true;
+		if (m_pos.y > Game::kScreenHight - kGraphicSizeY)  m_pos.y = Game::kScreenHight - kGraphicSizeY;	 //画面外に行かないように
 	}
-	else
-	{
-		m_vec.y *= 0.9f;
-	}
+	//左方向
 	if (padState & PAD_INPUT_LEFT)
 	{
-		m_vec.x -= kAcc;
-		if (m_vec.x < -kSpeedMax)	m_vec.x = -kSpeedMax;
+		m_pos.x--;
+		m_motion = 1;
+		isKey = true;
+		if (m_pos.x < 0)   m_pos.x = 0;	 //画面外に行かないように
 	}
-	else if (padState & PAD_INPUT_RIGHT)
+	//右方向
+	if (padState & PAD_INPUT_RIGHT)
 	{
-		m_vec.x += kAcc;
-		if (m_vec.x > kSpeedMax)	m_vec.x = kSpeedMax;
+		m_pos.x++;
+		m_motion = 2;
+		isKey = true;
+		if (m_pos.x > Game::kScreenWidth - kGraphicSizeX)  m_pos.x = Game::kScreenWidth - kGraphicSizeX;	 //画面外に行かないように
 	}
-	else
+	//キャラクターのアニメーション
+	if (isKey) m_animeFrame++;
+
+	if (m_animeFrame >= kGraphicDivX * kAnimeChangeFrame)
 	{
-		m_vec.x *= 0.9f;
+		m_animeFrame = 0;
 	}
-	m_pos += m_vec;
+
+	int tempAnimeNo = m_animeFrame / kAnimeChangeFrame;
+	m_animeNo = m_motion * kGraphicDivX + tempAnimeNo;
 }
 
 void Player::draw()
 {
-	DrawGraphF(m_pos.x, m_pos.y, m_handle, true);
+	//DrawGraphF(m_pos.x, m_pos.y, m_handle, true);
+	DrawGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y), m_handle[m_animeNo], true);
 }

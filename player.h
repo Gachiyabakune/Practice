@@ -7,11 +7,22 @@ class SceneMain;
 class Player
 {
 public:
+	//定数定義
+
+	//グラフィックデータ分割数
+	static constexpr int kGraphicDivX = 3;
+	static constexpr int kGraphicDivY = 4;
+	static constexpr int kGraphicDivNum = kGraphicDivX * kGraphicDivY;
+	//グラフィックデータサイズ
+	static constexpr int kGraphicSizeX = 32;
+	static constexpr int kGraphicSizeY = 32;
+
+public:
 	Player();
 	virtual ~Player();
 
 	// グラフィックデータ設定
-	void setHandle(int handle) { m_handle = handle; }
+	void setHandle(int index,int handle) { m_handle[index] = handle; }
 
 	// プレイヤーの初期化
 	void init();
@@ -28,7 +39,7 @@ public:
 	Vec2 getPos() const { return m_pos; }
 
 private:
-	int m_handle;
+	int m_handle[kGraphicDivNum];
 
 	//SceneMainのポインタ
 	SceneMain* m_pMain;
@@ -39,4 +50,10 @@ private:
 	Vec2 m_vec;
 
 	int m_shotInterval;
+
+	//キャラクターのアニメーション
+	int m_animeNo;		//表示する番号
+	int m_animeFrame;
+
+	int m_motion;	//進行方向
 };
