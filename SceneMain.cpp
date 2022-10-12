@@ -3,20 +3,28 @@
 #include "ShotBound.h"
 #include "ShotNormal.h"
 #include "ShotFall.h"
+#include "enemy.h"
+#include "backImg.h"
 #include <cassert>
 
 namespace
 {
 	//ショットの発射間隔
 	constexpr int kShotInterval = 16;
+
+	//グラフィックファイル名
+	const char* const kPlayerGraphicFilename = "data/kawamoto.png";
 }
 
 SceneMain::SceneMain()
 {
-	m_hPlayerGraphic = -1;
+	for (auto& handle : m_hPlayerGraphic)
+	{
+		handle = -1;
+	}
 	m_hShotGraphic = -1;
 	m_hTestSound = -1;
-	m_backImg = -1;
+	m_hEnemyGraphic = -1;
 }
 SceneMain::~SceneMain()
 {
@@ -26,19 +34,28 @@ SceneMain::~SceneMain()
 // 初期化
 void SceneMain::init()
 {
-	m_hPlayerGraphic = LoadGraph("data/player.bmp");
+	//m_hPlayerGraphic = LoadGraph("data/kyara.png");
+	LoadDivGraph(kPlayerGraphicFilename, Player::kGraphicDivNum,
+		Player::kGraphicDivX, Player::kGraphicDivY,
+		Player::kGraphicSizeX, Player::kGraphicSizeY, m_hPlayerGraphic);
+
 	m_hShotGraphic = LoadGraph("data/shot.bmp");
-	//m_backImg = LoadGraph("data/img.png");
+	m_hEnemyGraphic = LoadGraph("data/kumomitu.png");
 
 	//サウンドのロード
 	m_hTestSound = LoadSoundMem("sound/cursor0.mp3");
 
-	m_player.setHandle(m_hPlayerGraphic);
-//	m_player.setShotSe(m_hTestSound);
+	//m_player.setHandle(m_hPlayerGraphic);
+	for (int i = 0; i < Player::kGraphicDivNum; i++)
+	{
+		m_player.setHandle(i, m_hPlayerGraphic[i]);
+	}
 	m_player.init();
 	m_player.setMain(this);
 
-	//PlaySoundMem(m_hBgmSound, DX_PLAYTYPE_LOOP, true);
+	m_enemy.setHandle(m_hEnemyGraphic);
+	m_enemy.init();
+	m_enemy.setMain(this);
 }
 
 // 終了処理
@@ -47,10 +64,13 @@ void SceneMain::end()
 	//bgm終了
 //	StopSoundMem()
 
+	for (auto& handle : m_hPlayerGraphic)
+	{
+		DeleteGraph(handle);
+	}
 	//グラフィックアンロード
 //	DeleteGraph(m_hPlayerGraphic);
 	DeleteGraph(m_hShotGraphic);
-	//DeleteGraph(m_backImg);
 	//サウンドアンロード
 	DeleteSoundMem(m_hTestSound);
 
@@ -73,6 +93,7 @@ void SceneMain::update()
 	}
 
 	m_player.update();
+	m_enemy.update();
 
 	std::vector<ShotBase*>::iterator it = m_pShotVt.begin();
 	while (it != m_pShotVt.end())
@@ -91,28 +112,14 @@ void SceneMain::update()
 		}
 		it++;
 	}
-#if false
-	for (auto& pShot : m_pShotVt)
-	{
-		if (!pShot) continue;		//nullの場合処理しない
-		pShot->update();
-		if (!pShot->isExist())
-		{
-			delete pShot;
-			pShot = nullptr;
-
-			//vectorの要素削除
-
-		}
-	}
-#endif
 }
 
 // 毎フレームの描画
 void SceneMain::draw()
 {
-	//DrawGraph(0, 0, m_backImg, false);
+	m_backImg.draw();
 	m_player.draw();
+	m_enemy.draw();
 
 	for (auto& pShot : m_pShotVt)
 	{

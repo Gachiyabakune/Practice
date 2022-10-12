@@ -3,6 +3,8 @@
 #include <vector>
 #include "player.h"
 #include "ShotBase.h"
+#include "enemy.h"
+#include "backImg.h"
 
 class SceneMain
 {
@@ -28,11 +30,15 @@ public:
 private:
 
 	// プレイヤーのグラフィックハンドル
-	int m_hPlayerGraphic;
+	int m_hPlayerGraphic[Player::kGraphicDivNum];
 	int m_hShotGraphic;
-	int m_backImg;
+	int m_hEnemyGraphic;
 	// プレイヤー
 	Player m_player;
+	//敵
+	Enemy m_enemy;
+	//背景
+	Back m_backImg;
 	// ショット
 	std::vector<ShotBase*> m_pShotVt;
 	//サウンドハンドル
