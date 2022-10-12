@@ -92,6 +92,7 @@ void SceneMain::update()
 		PlaySoundMem(m_hTestSound, DX_PLAYTYPE_BACK, true);
 	}
 
+	m_backImg.update();
 	m_player.update();
 	m_enemy.update();
 
@@ -119,7 +120,7 @@ void SceneMain::draw()
 {
 	m_backImg.draw();
 	m_player.draw();
-	m_enemy.draw();
+	//m_enemy.draw();
 
 	for (auto& pShot : m_pShotVt)
 	{

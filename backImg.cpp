@@ -1,9 +1,16 @@
 #include "backImg.h"
 #include "DxLib.h"
+#include "game.h"
 
+namespace
+{
+	constexpr int scrollSpead = 2;
+}
 Back::Back()
 {
-	m_handle = LoadGraph("data/img.jpg");
+	m_handle = LoadGraph("data/midori.jpg");
+	x = 0;
+	y = 0;
 }
 
 Back::~Back()
@@ -13,16 +20,23 @@ Back::~Back()
 
 void Back::init()
 {
-	x = 0;
-	y = 0;
+
 }
 
 void Back::update()
 {
-
+	y += scrollSpead;
 }
 
 void Back::draw()
 {
+	//‚P–‡–Ú•`‰æ
 	DrawGraph(x, y, m_handle, false);
+	//‚Q–‡–Ú•`‰æ
+	DrawGraph(x, y - Game::kScreenHight, m_handle, false);
+	//‚P”Ô‰º‚Ü‚ÅƒXƒNƒ[ƒ‹‚·‚é‚Æ‰Šú’l‚É
+	if (y == 820)
+	{
+		y = 10;
+	}
 }
