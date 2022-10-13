@@ -37,5 +37,5 @@ void ShotBase::update()
 void ShotBase::draw()
 {
 	if (!m_isExist)return;
-	DrawGraphF(m_pos.x+32, m_pos.y, m_handle, true);
+	DrawGraphF(m_pos.x+8, m_pos.y, m_handle, true);	//’e‚ªƒLƒƒƒ‰‚Ì^‚ñ’†‚©‚ço‚é‚æ‚¤‚É’²®
 }

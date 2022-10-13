@@ -26,6 +26,7 @@ public:
 
 	// 情報の取得
 	Vec2 getPos() const { return m_pos; }
+	Vec2 getSize() const { return m_size; }
 
 private:
 	int m_handle;
@@ -35,16 +36,16 @@ private:
 
 	// 表示位置
 	Vec2 m_pos;
+	//
+	Vec2 m_size;
 	// 移動
 	Vec2 m_vec;
 
-	int m_shotInterval;
-
+	//int m_shotInterval;
+	//敵が出現してからのカウント
 	int m_count;
-
+	//出現、停止、帰還
 	int m_time, m_stopTime, m_outTime;
-
-	int count;
 
 	bool endFlag;
 };

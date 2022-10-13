@@ -6,8 +6,8 @@ namespace Game
 	constexpr bool kWindowmode = true;
 	const char* const kTitleText = "ＧＡＭＥ";
 	//ウィンドウサイズ
-	constexpr int kScreenWidth = 460;
-	constexpr int kScreenHight = 820;
+	constexpr int kScreenWidth = 640;
+	constexpr int kScreenHight = 480;
 	//カラーモード
 	constexpr int kColorDepth = 32;   //32 or 16
 };

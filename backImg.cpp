@@ -8,7 +8,7 @@ namespace
 }
 Back::Back()
 {
-	m_handle = LoadGraph("data/midori.jpg");
+	m_handle = LoadGraph("data/midori2.jpg");
 	x = 0;
 	y = 0;
 }
@@ -35,7 +35,7 @@ void Back::draw()
 	//２枚目描画
 	DrawGraph(x, y - Game::kScreenHight, m_handle, false);
 	//１番下までスクロールすると初期値に
-	if (y == 820)
+	if (y == 480)
 	{
 		y = 10;
 	}
