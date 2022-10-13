@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Vec2.h"
-
+#include "enemy.h"
 class SceneMain;
 
 class Player
@@ -35,9 +35,12 @@ public:
 	// 描画
 	void draw();
 
+	bool isCol(Enemy& enemy);
 	// 情報の取得
 	Vec2 getPos() const { return m_pos; }
 
+	//死亡設定
+	void setDead(bool isDead) { m_isDead = isDead; }
 private:
 	int m_handle[kGraphicDivNum];
 
@@ -48,12 +51,20 @@ private:
 	Vec2 m_pos;
 	// 移動
 	Vec2 m_vec;
-
+	//弾を撃つ時の間隔
 	int m_shotInterval;
-
+	//リロード
+	int m_reload;
+	//弾数
+	int m_count;
 	//キャラクターのアニメーション
 	int m_animeNo;		//表示する番号
 	int m_animeFrame;
 
 	int m_motion;	//進行方向
+	
+	int m_energy;	//エナジー
+	
+	bool m_isDead;
+
 };

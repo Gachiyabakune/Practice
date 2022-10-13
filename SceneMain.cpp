@@ -12,6 +12,9 @@ namespace
 	//ショットの発射間隔
 	constexpr int kShotInterval = 16;
 
+	//ライフ
+	constexpr int kLife = 3;
+
 	//グラフィックファイル名
 	const char* const kPlayerGraphicFilename = "data/kawamoto.png";
 }
@@ -25,7 +28,13 @@ SceneMain::SceneMain()
 	m_hShotGraphic = -1;
 	m_hTestSound = -1;
 	m_hEnemyGraphic = -1;
+	m_count = 0;
+	m_life = kLife;
+
+	m_frame = 0;	
+	m_hitFrame = 0;
 }
+
 SceneMain::~SceneMain()
 {
 
@@ -34,14 +43,14 @@ SceneMain::~SceneMain()
 // 初期化
 void SceneMain::init()
 {
-	//m_hPlayerGraphic = LoadGraph("data/kyara.png");
 	LoadDivGraph(kPlayerGraphicFilename, Player::kGraphicDivNum,
 		Player::kGraphicDivX, Player::kGraphicDivY,
 		Player::kGraphicSizeX, Player::kGraphicSizeY, m_hPlayerGraphic);
 
+	//弾の画像
 	m_hShotGraphic = LoadGraph("data/ice.png");
+	//敵の画像
 	m_hEnemyGraphic = LoadGraph("data/kumomitu.png");
-
 	//サウンドのロード
 	m_hTestSound = LoadSoundMem("sound/cursor0.mp3");
 
@@ -88,7 +97,7 @@ void SceneMain::end()
 //	m_count++;
 //}
 // 毎フレームの処理
-void SceneMain::update()
+bool SceneMain::update()
 {
 	int padState = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 	if(padState & PAD_INPUT_1)
@@ -117,6 +126,31 @@ void SceneMain::update()
 		}
 		it++;
 	}
+	if (m_player.isCol(m_enemy))
+	{
+		m_player.setDead(true);	//キャラが死亡
+
+		if (m_hitFrame == 0)	//1回の当たり判定時に１回しかライフは減らさない
+		{
+			m_life--;	//死亡時ライフを一つ減らす
+		}
+		m_hitFrame = 20;	//無敵時間20フレーム
+	}
+	if (m_hitFrame != 0)	//死んでいる時
+	{
+		m_hitFrame--;		//無敵フレームを減らす
+	}
+	if (true)
+	{
+		m_frame++;			//死んでいるとき1ずつカウント
+	}
+	if (m_frame == 300)		//カウントがたまるとキャラが復活
+	{
+		//m_player.setDead(false);
+		m_frame = 0;
+	}
+
+	return false;
 }
 
 // 毎フレームの描画
@@ -132,8 +166,15 @@ void SceneMain::draw()
 		pShot->draw();
 	}
 	//現在存在している弾の数を表示
-	DrawFormatString(0, 0, GetColor(255, 255, 255), "弾の数:%d", m_pShotVt.size());
-	//DrawFormatString(0, 50, GetColor(255, 255, 255), "カウント数:%d", m_count);
+	DrawFormatString(460, 0, GetColor(255, 255, 255), "弾の数:%d", m_pShotVt.size());
+	//
+	DrawFormatString(460, 40, GetColor(255, 255, 255), "討伐数:%d", m_count);
+	//
+	DrawFormatString(460, 60, GetColor(255, 255, 255), "SCORE:%d", m_count);
+	//
+	DrawFormatString(460, 80, GetColor(255, 255, 255), "LIFE:%d", m_life);
+	//
+	DrawFormatString(460, 100, GetColor(255, 255, 255), "ENERGY:%d", m_count);
 }
 
 bool SceneMain::createShotNormal(Vec2 pos)

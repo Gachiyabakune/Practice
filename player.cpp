@@ -1,14 +1,21 @@
 #include "DxLib.h"
 #include "game.h"
 #include "player.h"
-
+#include "enemy.h"
 #include "SceneMain.h"
 
 namespace
 {
-	//ショットの発射間隔
-	constexpr float kShotInterval = 16;
+	//キャラクターのサイズ
+	constexpr float kSizeX = 32.0f;
+	constexpr float kSizeY = 32.0f;
 
+	//ショットの発射間隔
+	constexpr float kShotInterval = 3;
+	//リロード時間
+	constexpr float kShotReload = 30;
+	//マガジン数
+	constexpr float kShotMagazine = 5;
 	//キャラクターアニメーション
 	constexpr int kAnimeChangeFrame = 8;
 }
@@ -24,6 +31,8 @@ Player::Player()
 	m_motion = 0;
 	m_pMain = nullptr;
 	m_shotInterval = 0;
+	m_animeFrame = 0;
+	m_isDead = false;
 }
 
 Player::~Player()
@@ -33,8 +42,8 @@ Player::~Player()
 
 void Player::init()
 {
-	m_pos.x = Game::kScreenWidth / 2 - kGraphicSizeX / 2;
-	m_pos.y = 574;		//キャラの位置が画面比の７：３
+	m_pos.x = (Game::kScreenWidth - 180 - kSizeX) / 2;
+	m_pos.y = 430;		//キャラの位置が画面比の７：３
 	m_vec.x = 0.0f;
 	m_vec.y = 0.0f;
 
@@ -42,30 +51,44 @@ void Player::init()
 	m_animeFrame = 0;
 	m_motion = 3;
 	m_shotInterval = 0;
+	m_energy = 500;
+	m_count = kShotMagazine;
+	m_reload = 0;
 }
 
 void Player::update()
 {
+	if (m_isDead) return;
 	// パッド(もしくはキーボード)からの入力を取得する
 	int padState = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 
-	//ショットを撃つ処理
+	//ショットを撃つ処理--------------------------------------
 	m_shotInterval--;
-	if (m_shotInterval < 0)m_shotInterval = 0;
+	if (m_shotInterval < 0) m_shotInterval = 0;
 
 	if (m_shotInterval <= 0)
 	{
 		//普通の弾
-		if (padState & PAD_INPUT_1)
+		if (padState & PAD_INPUT_1 && m_count > 0)
 		{
 			if (m_pMain->createShotNormal(getPos()))
 			{
+				m_count--;
 				m_shotInterval = kShotInterval;
 				//PlaySoundMem(m_hShotSe, DX_PLAYTYPE_BACK, true);
 			}
 		}
+		if (m_count == 0)
+		{
+			m_reload++;
+			if (m_reload > kShotReload)
+			{
+				m_count = kShotMagazine;
+				m_reload = 0;
+			}
+		}
 		//バウンド弾
-		if (padState & PAD_INPUT_2)
+		if (padState & PAD_INPUT_2 && m_energy >= 500)
 		{
 			if (m_pMain->createShotBound(getPos()))
 			{
@@ -74,15 +97,16 @@ void Player::update()
 			}
 		}
 		//改修中
-//		if (padState & PAD_INPUT_3)
-//		{
-//			if (m_pMain->createShotFall(getPos()))
-//			{
-//				m_shotInterval = kShotInterval;
-////				PlaySoundMem(m_hShotSe, DX_PLAYTYPE_BACK, true);
-//			}
-//		}
+		//if (padState & PAD_INPUT_3)
+		//{
+		//	if (m_pMain->createShotFall(getPos()))
+		//	{
+		//		m_shotInterval = kShotInterval;
+		//		//PlaySoundMem(m_hShotSe, DX_PLAYTYPE_BACK, true);
+		//	}
+		//}
 	}
+	//------------------------------------------------------------
 
 	//キャラの移動処理---------------------------------------------
 	bool isKey = false;
@@ -117,7 +141,7 @@ void Player::update()
 		m_pos.x++;
 		m_motion = 2;
 		isKey = true;
-		if (m_pos.x > Game::kScreenWidth - kGraphicSizeX)  m_pos.x = Game::kScreenWidth - kGraphicSizeX;	 //画面外に行かないように
+		if (m_pos.x > Game::kScreenWidth - kGraphicSizeX - 180)  m_pos.x = Game::kScreenWidth - kGraphicSizeX-180;	 //画面外に行かないように
 	}
 	//左上方向に進むなら向きを上方向を優先する
 	if (padState & PAD_INPUT_UP && padState & PAD_INPUT_RIGHT)
@@ -143,6 +167,34 @@ void Player::update()
 
 void Player::draw()
 {
-	//DrawGraphF(m_pos.x, m_pos.y, m_handle, true);
-	DrawGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y), m_handle[m_animeNo], true);
+	DrawFormatString(460, 120, GetColor(255, 255, 255), "残り弾数:%d", m_count);
+	if (!m_isDead)
+	{
+		DrawGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y), m_handle[m_animeNo], true);
+	}
+}
+
+bool Player::isCol(Enemy& enemy)
+{
+	float playerLeft = getPos().x;
+	float playerRight = getPos().x + kSizeX;
+	float playerTop = getPos().y;
+	float playerBottom = getPos().y + kSizeY;
+
+	float enemyLeft = enemy.getPos().x;
+	float enemyRight = enemy.getPos().x + enemy.getSize().x;
+	float enemyTop = enemy.getPos().y;
+	float enemyBottom = enemy.getPos().y + enemy.getSize().y;
+
+	float bulletLeft = ;
+	float bulletRight;
+	float bulletTop;
+	float bulletBottom;
+
+	if (playerLeft > enemyRight)	return false;
+	if (playerRight < enemyLeft)	return false;
+	if (playerTop > enemyBottom)	return false;
+	if (playerBottom < enemyTop)	return false;
+
+	return true;
 }

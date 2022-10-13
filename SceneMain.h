@@ -19,7 +19,7 @@ public:
 
 	//void count();
 	// 毎フレームの処理
-	void update();
+	bool update();
 	// 毎フレームの描画
 	void draw();
 
@@ -45,6 +45,11 @@ private:
 	std::vector<ShotBase*> m_pShotVt;
 	//サウンドハンドル
 	int m_hTestSound;
-
-	//int m_count;
+	//カウント用
+	int m_count;
+	//残機
+	int m_life;
+	
+	int m_frame = 0;		//計測用の変数
+	int m_hitFrame = 0;   //無敵フレーム
 };
