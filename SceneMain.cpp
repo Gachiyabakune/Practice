@@ -33,6 +33,7 @@ SceneMain::SceneMain()
 
 	m_frame = 0;	
 	m_hitFrame = 0;
+	m_RepelNum = 0;
 }
 
 SceneMain::~SceneMain()
@@ -70,12 +71,10 @@ void SceneMain::init()
 // 終了処理
 void SceneMain::end()
 {
-	//bgm終了
-//	StopSoundMem()
-
 	for (auto& handle : m_hPlayerGraphic)
 	{
 		DeleteGraph(handle);
+		m_RepelNum++;
 	}
 	//グラフィックアンロード
 //	DeleteGraph(m_hPlayerGraphic);
@@ -92,10 +91,6 @@ void SceneMain::end()
 	}
 }
 
-//void SceneMain::count()
-//{
-//	m_count++;
-//}
 // 毎フレームの処理
 bool SceneMain::update()
 {
@@ -114,7 +109,27 @@ bool SceneMain::update()
 	{
 		auto& pShot = (*it);
 		assert(pShot);
-		pShot->update();
+		pShot->update()
+			;
+		//敵の死亡判定---------------------------
+		if (m_enemy.isCol(*pShot))
+		{
+			m_enemy.setDead(true);	//キャラが死亡
+
+			if (m_hitFrame == 0)	//1回の当たり判定時に１回しかライフは減らさない
+			{
+				PlaySoundFile("sound/atotyotto.mp3", DX_PLAYTYPE_NORMAL);
+				m_RepelNum++;
+			}
+			m_hitFrame = 20;	//無敵時間20フレーム
+
+			if (m_hitFrame != 0)	//死んでいる時
+			{
+				m_hitFrame--;		//無敵フレームを減らす
+			}
+		}
+		//----------------------------------------
+
 		if (!pShot->isExist())
 		{
 			delete pShot;
@@ -150,6 +165,9 @@ bool SceneMain::update()
 		m_frame = 0;
 	}
 
+	
+
+
 	return false;
 }
 
@@ -168,7 +186,7 @@ void SceneMain::draw()
 	//現在存在している弾の数を表示
 	DrawFormatString(460, 0, GetColor(255, 255, 255), "弾の数:%d", m_pShotVt.size());
 	//
-	DrawFormatString(460, 40, GetColor(255, 255, 255), "討伐数:%d", m_count);
+	DrawFormatString(460, 40, GetColor(255, 255, 255), "討伐数:%d", m_RepelNum);
 	//
 	DrawFormatString(460, 60, GetColor(255, 255, 255), "SCORE:%d", m_count);
 	//

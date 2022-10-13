@@ -20,13 +20,18 @@ public:
 	//存在るするか
 	bool isExist() const { return m_isExist; }
 
+	Vec2 getPos() const { return m_pos; }
+	Vec2 getSize() const { return m_size; }
+
 private:
 	// グラフィックハンドル
 	int m_handle;
 	// 表示位置
-	Vec2	m_pos;
+	Vec2 m_pos;
 	// 移動
-	Vec2	m_vec;
+	Vec2 m_vec;
+
+	Vec2 m_size;
 	//存在するか
 	bool    m_isExist;
 

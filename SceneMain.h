@@ -39,6 +39,7 @@ private:
 	Player m_player;
 	//敵
 	Enemy m_enemy;
+	ShotBase m_shotBase;
 	//背景
 	Back m_backImg;
 	// ショット
@@ -49,7 +50,9 @@ private:
 	int m_count;
 	//残機
 	int m_life;
-	
+	//討伐数
+	int m_RepelNum;
+
 	int m_frame = 0;		//計測用の変数
 	int m_hitFrame = 0;   //無敵フレーム
 };
