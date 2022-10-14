@@ -1,6 +1,7 @@
 #include "DxLib.h"
 #include "game.h"
 #include "enemy.h"
+#include "shot.h"
 #include "ShotBase.h"
 #include "SceneMain.h"
 
@@ -35,7 +36,9 @@ void Enemy::init()
 
 	m_time = 120;
 	m_stopTime = 180;
-	m_outTime = 480;
+	m_outTime = 480;	
+
+	temp = 0;
 }
 
 void Enemy::update()
@@ -48,10 +51,17 @@ void Enemy::update()
 		m_pos.y += 2;
 	}
 
+	if (m_count == 200 ||m_count == 220 || m_count == 240)
+	{
+		if (m_pMain->createShotFall(getPos()))
+		{
+		}
+	}
 	//決められた時間外になると画面外に消えていく
 	else if (m_count > m_outTime)
 	{
 		m_pos.y -= 2;
+		temp = 1;
 		if (m_pos.y < -40)
 		{
 			m_isDead = true;
@@ -70,7 +80,14 @@ void Enemy::draw()
 	//死んでいたら描画しない
 	if (!m_isDead)
 	{
-		DrawGraphF(m_pos.x, m_pos.y, m_handle, true);
+		if (temp == 0)
+		{
+			DrawRectGraphF(m_pos.x, m_pos.y,0,0,64,64, m_handle, true);
+		}
+		else
+		{
+			DrawRectGraphF(m_pos.x, m_pos.y, 64, 0, 64, 64, m_handle, true);
+		}
 	}
 	DrawFormatString(460, 20, GetColor(255, 255, 255), "カウント数:%d", m_count);
 }
@@ -89,6 +106,12 @@ bool Enemy::isCol(ShotBase& shotBase)
 	float bulletTop = shotBase.getPos().y;
 	float bulletBottom = shotBase.getPos().y + shotBase.getSize().y;
 	
+	//自分が撃った弾の判定をもらわないために
+	//弾を撃ったのがプレイヤーだったら
+	if (!shotBase.getPlayerShot())
+	{
+		return false;
+	}
 
 	if (enemyLeft > bulletRight)	return false;
 	if (enemyRight < bulletLeft)	return false;

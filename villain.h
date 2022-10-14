@@ -1,11 +1,12 @@
 #pragma once
+
 #include "Vec2.h"
 
-class Shot
+class Villain
 {
 public:
-	Shot();
-	virtual ~Shot();
+	Villain();
+	virtual ~Villain();
 
 	void setHandle(int handle) { m_handle = handle; }
 
@@ -34,6 +35,4 @@ private:
 	Vec2 m_size;
 	//ë∂ç›Ç∑ÇÈÇ©
 	bool    m_isExist;
-
-	//int  m_shotInterval;
 };

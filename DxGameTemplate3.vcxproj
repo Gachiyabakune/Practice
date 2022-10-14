@@ -162,6 +162,9 @@
     <ClCompile Include="ShotFall.cpp" />
     <ClCompile Include="ShotNormal.cpp" />
     <ClCompile Include="vec2.cpp" />
+    <ClCompile Include="villain.cpp" />
+    <ClCompile Include="villainBase.cpp" />
+    <ClCompile Include="villainFirst.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="backImg.h" />
@@ -176,6 +179,9 @@
     <ClInclude Include="ShotFall.h" />
     <ClInclude Include="ShotNormal.h" />
     <ClInclude Include="vec2.h" />
+    <ClInclude Include="villain.h" />
+    <ClInclude Include="villainBase.h" />
+    <ClInclude Include="villainFirst.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

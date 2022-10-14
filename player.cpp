@@ -80,6 +80,7 @@ void Player::update()
 				//PlaySoundMem(m_hShotSe, DX_PLAYTYPE_BACK, true);
 			}
 		}
+		//弾が0になるとリロードを挟む------------------
 		if (m_count == 0)
 		{
 			m_reload++;
@@ -89,6 +90,8 @@ void Player::update()
 				m_reload = 0;
 			}
 		}
+		//----------------------------------------------
+
 		//バウンド弾
 		if (padState & PAD_INPUT_2 && m_energy >= 500)
 		{
@@ -155,6 +158,7 @@ void Player::update()
 	{
 		m_motion = 3;
 	}
+
 	//キャラクターのアニメーション
 	if (isKey) m_animeFrame++;
 
@@ -176,6 +180,7 @@ void Player::draw()
 	}
 }
 
+//敵と自分のキャラの判定
 bool Player::isCol(Enemy& enemy)
 {
 	float playerLeft = getPos().x;
@@ -192,6 +197,33 @@ bool Player::isCol(Enemy& enemy)
 	if (playerRight < enemyLeft)	return false;
 	if (playerTop > enemyBottom)	return false;
 	if (playerBottom < enemyTop)	return false;
+
+	return true;
+}
+
+//自分のキャラと敵の弾の判定
+bool Player::isColShot(ShotBase& shotBase)
+{
+	float playerLeft = getPos().x;
+	float playerRight = getPos().x + kSizeX;
+	float playerTop = getPos().y;
+	float playerBottom = getPos().y + kSizeY;
+
+	float bulletLeft = shotBase.getPos().x;
+	float bulletRight = shotBase.getPos().x + shotBase.getSize().x;
+	float bulletTop = shotBase.getPos().y;
+	float bulletBottom = shotBase.getPos().y + shotBase.getSize().y;
+
+	//撃ったのが自分でなければ
+	if (shotBase.getPlayerShot())
+	{
+		return false;
+	}
+
+	if (playerLeft > bulletRight)	return false;
+	if (playerRight < bulletLeft)	return false;
+	if (playerTop > bulletBottom)	return false;
+	if (playerBottom < bulletTop)	return false;
 
 	return true;
 }

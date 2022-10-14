@@ -52,4 +52,6 @@ private:
 	int m_time, m_stopTime, m_outTime;
 
 	bool m_isDead;
+
+	int temp;
 };

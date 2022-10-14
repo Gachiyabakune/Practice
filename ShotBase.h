@@ -24,6 +24,9 @@ public:
 	Vec2 getPos() const { return m_pos; }
 	Vec2 getSize() const { return m_size; }
 
+	void setPlayerShot(bool isPlayer) {m_isPlayer = isPlayer;}	//撃っているのが敵か味方か
+	bool getPlayerShot() const {return m_isPlayer; }			
+
 //継承先からも使えるようになる
 protected:	
 	// グラフィックハンドル
@@ -35,6 +38,8 @@ protected:
 
 	Vec2 m_size;
 	//存在するか
-	bool    m_isExist;
+	bool m_isExist;
+
+	bool m_isPlayer;
 
 };

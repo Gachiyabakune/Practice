@@ -18,6 +18,7 @@ ShotBase::ShotBase()
 	m_vec.y = 0.0f;
 
 	m_isExist = false;
+	m_isPlayer = false;
 }
 
 ShotBase::~ShotBase()
@@ -38,26 +39,18 @@ void ShotBase::update()
 // 表示
 void ShotBase::draw()
 {
+	//死んでいたら描画しない
 	if (!m_isExist)return;
-	DrawGraphF(m_pos.x+8, m_pos.y, m_handle, true);	//弾がキャラの真ん中から出るように調整
+
+	//
+	if (m_isPlayer)
+	{
+		DrawGraphF(m_pos.x + 8, m_pos.y, m_handle, true);	//弾がキャラの真ん中から出るように調整
+	}
+	else if (!m_isPlayer)
+	{
+		DrawGraphF(m_pos.x + 32, m_pos.y+64, m_handle, true);	//弾がキャラの真ん中から出るように調整
+	}
+	
 }
 
-//bool ShotBase::isCol(Enemy& enemy)
-//{
-//	float bulletLeft = getPos().x;
-//	float bulletRight = getPos().x + kSizeX;
-//	float bulletTop = getPos().y;
-//	float bulletBottom = getPos().y + kSizeY;
-//
-//	float enemyLeft = enemy.getPos().x;
-//	float enemyRight = enemy.getPos().x + enemy.getSize().x;
-//	float enemyTop = enemy.getPos().y;
-//	float enemyBottom = enemy.getPos().y + enemy.getSize().y;
-//
-//	if (bulletLeft > enemyRight)	return false;
-//	if (bulletRight < enemyLeft)	return false;
-//	if (bulletTop > enemyBottom)	return false;
-//	if (bulletBottom < enemyTop)	return false;
-//
-//	return true;
-//}

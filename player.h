@@ -36,6 +36,9 @@ public:
 	void draw();
 
 	bool isCol(Enemy& enemy);
+
+	bool isColShot(ShotBase& shotBase);
+
 	// î•ñ‚Ìæ“¾
 	Vec2 getPos() const { return m_pos; }
 

@@ -26,8 +26,4 @@ void ShotNormal::update()
 	{
 		m_isExist = false;
 	}
-	/*if (m_pos.x < 0)
-	{
-		m_isExist = false;
-	}*/
 }

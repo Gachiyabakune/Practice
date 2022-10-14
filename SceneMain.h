@@ -5,6 +5,7 @@
 #include "ShotBase.h"
 #include "enemy.h"
 #include "backImg.h"
+#include "villainBase.h"
 
 class SceneMain
 {
@@ -28,22 +29,28 @@ public:
 	bool createShotFall(Vec2 pos);
 	bool createShotBound(Vec2 pos);
 
+	bool createVillainFirst(Vec2 pos);
+
 private:
 
 	// プレイヤーのグラフィックハンドル
 	int m_hPlayerGraphic[Player::kGraphicDivNum];
 	int m_hShotGraphic;
+	int m_hShotGraphic1;
 	int m_hEnemyGraphic;
+	int m_VillainGraphic;
 	
 	// プレイヤー
 	Player m_player;
 	//敵
 	Enemy m_enemy;
-	ShotBase m_shotBase;
 	//背景
 	Back m_backImg;
 	// ショット
 	std::vector<ShotBase*> m_pShotVt;
+	//
+	std::vector<VillainBase*> m_villainVt;
+
 	//サウンドハンドル
 	int m_hTestSound;
 	//カウント用
@@ -53,6 +60,6 @@ private:
 	//討伐数
 	int m_RepelNum;
 
-	int m_frame = 0;		//計測用の変数
-	int m_hitFrame = 0;   //無敵フレーム
+	int m_frame;		//計測用の変数
+	int m_hitFrame;   //無敵フレーム
 };

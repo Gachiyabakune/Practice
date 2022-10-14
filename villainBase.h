@@ -1,29 +1,30 @@
 #pragma once
+
 #include "Vec2.h"
 
-class Shot
+class VillainBase
 {
 public:
-	Shot();
-	virtual ~Shot();
+	VillainBase();
+	virtual ~VillainBase();
 
 	void setHandle(int handle) { m_handle = handle; }
 
 	//ショット開始
-	void start(Vec2 pos);
-
+	virtual void start(Vec2 pos);
 	// 更新
-	void update();
+	virtual void update();
 	// 表示
-	void draw();
+	virtual void draw();
 
 	//存在るするか
 	bool isExist() const { return m_isExist; }
-
+	// 情報の取得
 	Vec2 getPos() const { return m_pos; }
 	Vec2 getSize() const { return m_size; }
 
-private:
+	//継承先からも使えるようになる
+protected:
 	// グラフィックハンドル
 	int m_handle;
 	// 表示位置
@@ -35,5 +36,4 @@ private:
 	//存在するか
 	bool    m_isExist;
 
-	//int  m_shotInterval;
 };
