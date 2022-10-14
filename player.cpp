@@ -2,6 +2,8 @@
 #include "game.h"
 #include "player.h"
 #include "enemy.h"
+#include "shot.h"
+#include "ShotBase.h"
 #include "SceneMain.h"
 
 namespace
@@ -185,11 +187,6 @@ bool Player::isCol(Enemy& enemy)
 	float enemyRight = enemy.getPos().x + enemy.getSize().x;
 	float enemyTop = enemy.getPos().y;
 	float enemyBottom = enemy.getPos().y + enemy.getSize().y;
-
-	float bulletLeft = ;
-	float bulletRight;
-	float bulletTop;
-	float bulletBottom;
 
 	if (playerLeft > enemyRight)	return false;
 	if (playerRight < enemyLeft)	return false;

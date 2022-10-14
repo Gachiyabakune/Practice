@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Vec2.h"
+#include "ShotBase.h"
 
 class SceneMain;
 
@@ -28,6 +29,9 @@ public:
 	Vec2 getPos() const { return m_pos; }
 	Vec2 getSize() const { return m_size; }
 
+	bool isCol(ShotBase& shotBase);
+	//死亡設定
+	void setDead(bool isDead) { m_isDead = isDead; }
 private:
 	int m_handle;
 
@@ -47,5 +51,5 @@ private:
 	//出現、停止、帰還
 	int m_time, m_stopTime, m_outTime;
 
-	bool endFlag;
+	bool m_isDead;
 };

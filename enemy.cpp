@@ -66,6 +66,8 @@ void Enemy::draw()
 	DrawFormatString(460, 20, GetColor(255, 255, 255), "ƒJƒEƒ“ƒg”:%d", m_count);
 }
 
+
+//“–‚½‚è”»’è
 bool Enemy::isCol(ShotBase& shotBase)
 {
 	float enemyLeft = getPos().x;

@@ -53,7 +53,7 @@ void SceneMain::init()
 	//敵の画像
 	m_hEnemyGraphic = LoadGraph("data/kumomitu.png");
 	//サウンドのロード
-	m_hTestSound = LoadSoundMem("sound/cursor0.mp3");
+	m_hTestSound = LoadSoundMem("sound/yonesound.mp3");
 
 	//m_player.setHandle(m_hPlayerGraphic);
 	for (int i = 0; i < Player::kGraphicDivNum; i++)
@@ -118,7 +118,7 @@ bool SceneMain::update()
 
 			if (m_hitFrame == 0)	//1回の当たり判定時に１回しかライフは減らさない
 			{
-				PlaySoundFile("sound/atotyotto.mp3", DX_PLAYTYPE_NORMAL);
+				PlaySoundMem(m_hTestSound, DX_PLAYTYPE_NORMAL,true);
 				m_RepelNum++;
 			}
 			m_hitFrame = 20;	//無敵時間20フレーム
