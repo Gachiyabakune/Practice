@@ -34,8 +34,8 @@ void Enemy::init()
 	//m_shotInterval = 0;
 
 	m_time = 120;
-	m_stopTime = 210;
-	m_outTime = 600;
+	m_stopTime = 180;
+	m_outTime = 480;
 }
 
 void Enemy::update()
@@ -53,6 +53,10 @@ void Enemy::update()
 		{
 			m_isDead = true;
 		}
+	}
+	if (m_isDead)
+	{
+		m_pos.y = -100;
 	}
 }
 
