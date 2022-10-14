@@ -40,12 +40,15 @@ void Enemy::init()
 
 void Enemy::update()
 {
-	m_count++;
+	m_count++;		//カウント
 	
+	//ゲーム開始時画面上から出現し決められた時間になるとその場所で止まる
 	if (m_time < m_count && m_count < m_stopTime)
 	{
 		m_pos.y += 2;
 	}
+
+	//決められた時間外になると画面外に消えていく
 	else if (m_count > m_outTime)
 	{
 		m_pos.y -= 2;
@@ -54,6 +57,7 @@ void Enemy::update()
 			m_isDead = true;
 		}
 	}
+	//死んでいたら画面外に飛ばす
 	if (m_isDead)
 	{
 		m_pos.y = -100;
@@ -63,6 +67,7 @@ void Enemy::update()
 
 void Enemy::draw()
 {
+	//死んでいたら描画しない
 	if (!m_isDead)
 	{
 		DrawGraphF(m_pos.x, m_pos.y, m_handle, true);
