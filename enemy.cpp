@@ -51,9 +51,11 @@ void Enemy::update()
 		m_pos.y += 2;
 	}
 
-	if (m_count == 200 ||m_count == 220 || m_count == 240)
+	if (m_count == 200 ||m_count == 203 || m_count == 206 ||
+		m_count == 240 ||m_count == 243 || m_count == 246 ||
+		m_count == 280 ||m_count == 283 || m_count == 286)
 	{
-		if (m_pMain->createShotFall(getPos()))
+		if (m_pMain->createShotEnmeyRandom(getPos()))
 		{
 		}
 	}

@@ -2,7 +2,8 @@
 #include "SceneMain.h"
 #include "ShotBound.h"
 #include "ShotNormal.h"
-#include "ShotFall.h"
+#include "ShotEnemy.h"
+#include "ShotEnemyRandom.h"
 #include "enemy.h"
 #include "backImg.h"
 #include "villainFirst.h"
@@ -259,9 +260,9 @@ bool SceneMain::createShotNormal(Vec2 pos)
 	return true;
 }
 
-bool SceneMain::createShotFall(Vec2 pos)
+bool SceneMain::createShotEnemy(Vec2 pos)
 {
-	ShotFall* pShot = new ShotFall;
+	ShotEnemy* pShot = new ShotEnemy;
 	pShot->setHandle(m_hShotGraphic1);
 	pShot->start(pos);
 
@@ -280,6 +281,19 @@ bool SceneMain::createShotBound(Vec2 pos)
 	pShot->setPlayerShot(true);		//Œ‚‚Á‚Ä‚¢‚é‚Ì‚ª“G‚©–¡•û‚©”»•Ê
 
 	pShot->start(pos);
+	m_pShotVt.push_back(pShot);
+
+	return true;
+}
+
+bool SceneMain::createShotEnmeyRandom(Vec2 pos)
+{
+	ShotEnemyRandom* pShot = new ShotEnemyRandom;
+	pShot->setHandle(m_hShotGraphic1);
+	pShot->start(pos);
+
+	pShot->setPlayerShot(false);		//Œ‚‚Á‚Ä‚¢‚é‚Ì‚ª“G‚©–¡•û‚©”»•Ê
+
 	m_pShotVt.push_back(pShot);
 
 	return true;

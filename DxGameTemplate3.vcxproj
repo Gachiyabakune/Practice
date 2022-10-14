@@ -159,7 +159,8 @@
     <ClCompile Include="shot.cpp" />
     <ClCompile Include="ShotBase.cpp" />
     <ClCompile Include="ShotBound.cpp" />
-    <ClCompile Include="ShotFall.cpp" />
+    <ClCompile Include="ShotEenmyRandom.cpp" />
+    <ClCompile Include="ShotEnemy.cpp" />
     <ClCompile Include="ShotNormal.cpp" />
     <ClCompile Include="vec2.cpp" />
     <ClCompile Include="villain.cpp" />
@@ -168,7 +169,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="backImg.h" />
-    <ClInclude Include="define.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="player.h" />
@@ -176,7 +176,8 @@
     <ClInclude Include="shot.h" />
     <ClInclude Include="ShotBase.h" />
     <ClInclude Include="ShotBound.h" />
-    <ClInclude Include="ShotFall.h" />
+    <ClInclude Include="ShotEnemy.h" />
+    <ClInclude Include="ShotEnemyRandom.h" />
     <ClInclude Include="ShotNormal.h" />
     <ClInclude Include="vec2.h" />
     <ClInclude Include="villain.h" />
