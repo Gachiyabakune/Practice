@@ -21,7 +21,7 @@ void ShotEnemy::update( )
 	if (!m_isExist)return;
 	m_pos.y += kShotSpeedY;
 
-	if (m_pos.y < 0)
+	if (m_pos.y > 480)
 	{
 		m_isExist = false;
 	}
