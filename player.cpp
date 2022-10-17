@@ -56,6 +56,9 @@ void Player::init()
 	m_energy = 500;
 	m_count = kShotMagazine;
 	m_reload = 0;
+
+	m_size.x = kSizeX;
+	m_size.y = kSizeY;
 }
 
 void Player::update()
@@ -178,6 +181,7 @@ void Player::draw()
 	{
 		DrawGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y), m_handle[m_animeNo], true);
 	}
+	DrawBox(getPos().x, getPos().y, getPos().x+ kSizeX - 1, getPos().y+ kSizeX - 1, GetColor(255, 255, 255), false);
 }
 
 //“G‚Æ©•ª‚ÌƒLƒƒƒ‰‚Ì”»’è
@@ -204,7 +208,7 @@ bool Player::isCol(Enemy& enemy)
 //©•ª‚ÌƒLƒƒƒ‰‚Æ“G‚Ì’e‚Ì”»’è
 bool Player::isColShot(ShotBase& shotBase)
 {
-	float playerLeft = getPos().x;
+	float playerLeft = getPos().x- kSizeX;	//“–‚½‚è”»’è’²®‚Ì‚½‚ß-kSizeY
 	float playerRight = getPos().x + kSizeX;
 	float playerTop = getPos().y;
 	float playerBottom = getPos().y + kSizeY;

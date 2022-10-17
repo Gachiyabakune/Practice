@@ -13,27 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ヘッダー ファイル\shot">
+      <UniqueIdentifier>{23762adf-48cd-4271-84da-0c639151685b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\shot">
+      <UniqueIdentifier>{7dff6a46-f74c-4fde-a42d-5515655307c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="vec2.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="shot.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ShotBase.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ShotBound.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ShotEnemy.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ShotNormal.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="SceneMain.cpp">
@@ -57,8 +48,23 @@
     <ClCompile Include="villainFirst.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="shot.cpp">
+      <Filter>ソース ファイル\shot</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotBase.cpp">
+      <Filter>ソース ファイル\shot</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotBound.cpp">
+      <Filter>ソース ファイル\shot</Filter>
+    </ClCompile>
     <ClCompile Include="ShotEenmyRandom.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\shot</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotEnemy.cpp">
+      <Filter>ソース ファイル\shot</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotNormal.cpp">
+      <Filter>ソース ファイル\shot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -66,21 +72,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="vec2.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="shot.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ShotBase.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ShotBound.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ShotEnemy.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ShotNormal.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="SceneMain.h">
@@ -104,8 +95,23 @@
     <ClInclude Include="villainFirst.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="shot.h">
+      <Filter>ヘッダー ファイル\shot</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotBase.h">
+      <Filter>ヘッダー ファイル\shot</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotBound.h">
+      <Filter>ヘッダー ファイル\shot</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotEnemy.h">
+      <Filter>ヘッダー ファイル\shot</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotNormal.h">
+      <Filter>ヘッダー ファイル\shot</Filter>
+    </ClInclude>
     <ClInclude Include="ShotEnemyRandom.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\shot</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

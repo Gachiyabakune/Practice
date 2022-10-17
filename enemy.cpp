@@ -37,8 +37,6 @@ void Enemy::init()
 	m_time = 120;
 	m_stopTime = 180;
 	m_outTime = 480;	
-
-	temp = 0;
 }
 
 void Enemy::update()
@@ -55,7 +53,7 @@ void Enemy::update()
 		m_count == 240 ||m_count == 243 || m_count == 246 ||
 		m_count == 280 ||m_count == 283 || m_count == 286)
 	{
-		if (m_pMain->createShotEnmeyRandom(getPos()))
+		if (m_pMain->createShotEnemy(getPos()))
 		{
 		}
 	}
@@ -63,7 +61,6 @@ void Enemy::update()
 	else if (m_count > m_outTime)
 	{
 		m_pos.y -= 2;
-		temp = 1;
 		if (m_pos.y < -40)
 		{
 			m_isDead = true;
@@ -82,14 +79,7 @@ void Enemy::draw()
 	//Ž€‚ñ‚Å‚¢‚½‚ç•`‰æ‚µ‚È‚¢
 	if (!m_isDead)
 	{
-		if (temp == 0)
-		{
-			DrawRectGraphF(m_pos.x, m_pos.y,0,0,64,64, m_handle, true);
-		}
-		else
-		{
-			DrawRectGraphF(m_pos.x, m_pos.y, 64, 0, 64, 64, m_handle, true);
-		}
+		DrawGraphF(m_pos.x, m_pos.y, m_handle, true);
 	}
 	DrawFormatString(460, 20, GetColor(255, 255, 255), "ƒJƒEƒ“ƒg”:%d", m_count);
 }
@@ -99,7 +89,7 @@ void Enemy::draw()
 bool Enemy::isCol(ShotBase& shotBase)
 {
 	float enemyLeft = getPos().x;
-	float enemyRight = getPos().x + kSizeX;
+	float enemyRight = getPos().x + kSizeX-20;	//“–‚½‚è”»’è’²®‚Ì‚½‚ß‚Ì+20
 	float enemyTop = getPos().y;
 	float enemyBottom = getPos().y + kSizeY;
 

@@ -56,7 +56,7 @@ void SceneMain::init()
 	m_hShotGraphic = LoadGraph("data/ice.png");
 	m_hShotGraphic1 = LoadGraph("data/shot.bmp");
 	//“G‚Ì‰æ‘œ
-	m_hEnemyGraphic = LoadGraph("data/sample.png");
+	m_hEnemyGraphic = LoadGraph("data/kumomitu.png");
 	//ƒTƒEƒ“ƒh‚Ìƒ[ƒh
 	m_hTestSound = LoadSoundMem("sound/yonesound.mp3");
 	//
@@ -250,10 +250,9 @@ bool SceneMain::createShotNormal(Vec2 pos)
 {
 	ShotNormal* pShot = new ShotNormal;
 	pShot->setHandle(m_hShotGraphic);
+	pShot->start(pos);
 
 	pShot->setPlayerShot(true);		//Œ‚‚Á‚Ä‚¢‚é‚Ì‚ª“G‚©–¡•û‚©”»•Ê
-
-	pShot->start(pos);
 	
 	m_pShotVt.push_back(pShot);
 
@@ -277,10 +276,10 @@ bool SceneMain::createShotBound(Vec2 pos)
 {
 	ShotBound* pShot = new ShotBound;
 	pShot->setHandle(m_hShotGraphic);
+	pShot->start(pos);
 
 	pShot->setPlayerShot(true);		//Œ‚‚Á‚Ä‚¢‚é‚Ì‚ª“G‚©–¡•û‚©”»•Ê
 
-	pShot->start(pos);
 	m_pShotVt.push_back(pShot);
 
 	return true;

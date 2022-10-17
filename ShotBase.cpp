@@ -19,6 +19,9 @@ ShotBase::ShotBase()
 
 	m_isExist = false;
 	m_isPlayer = false;
+
+	m_size.x = kSizeX;
+	m_size.y = kSizeY;
 }
 
 ShotBase::~ShotBase()

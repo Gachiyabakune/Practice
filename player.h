@@ -41,6 +41,7 @@ public:
 
 	// î•ñ‚Ìæ“¾
 	Vec2 getPos() const { return m_pos; }
+	Vec2 getSize() const { return m_size; }
 
 	//€–Sİ’è
 	void setDead(bool isDead) { m_isDead = isDead; }
@@ -54,6 +55,8 @@ private:
 	Vec2 m_pos;
 	// ˆÚ“®
 	Vec2 m_vec;
+
+	Vec2 m_size;
 	//’e‚ğŒ‚‚Â‚ÌŠÔŠu
 	int m_shotInterval;
 	//ƒŠƒ[ƒh
