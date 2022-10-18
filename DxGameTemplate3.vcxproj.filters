@@ -19,33 +19,27 @@
     <Filter Include="ソース ファイル\shot">
       <UniqueIdentifier>{7dff6a46-f74c-4fde-a42d-5515655307c4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\villain">
+      <UniqueIdentifier>{1b9ac877-ebda-4408-8bb6-bbfe9bf9f4db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\villain">
+      <UniqueIdentifier>{e8fd6c40-47b5-4dbd-af96-1509353aae94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\scene">
+      <UniqueIdentifier>{24fd4603-5093-4a20-9cc8-fab9109d9787}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\scene">
+      <UniqueIdentifier>{2595d766-e001-4e78-803e-4e0d175ca24a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="vec2.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneMain.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="player.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="enemy.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="backImg.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="villain.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="villainBase.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="villainFirst.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="shot.cpp">
@@ -66,6 +60,24 @@
     <ClCompile Include="ShotNormal.cpp">
       <Filter>ソース ファイル\shot</Filter>
     </ClCompile>
+    <ClCompile Include="villain.cpp">
+      <Filter>ソース ファイル\villain</Filter>
+    </ClCompile>
+    <ClCompile Include="villainBase.cpp">
+      <Filter>ソース ファイル\villain</Filter>
+    </ClCompile>
+    <ClCompile Include="villainFirst.cpp">
+      <Filter>ソース ファイル\villain</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMain.cpp">
+      <Filter>ソース ファイル\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="backImg.cpp">
+      <Filter>ソース ファイル\scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -74,25 +86,10 @@
     <ClInclude Include="vec2.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SceneMain.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="player.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="enemy.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="backImg.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="villain.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="villainBase.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="villainFirst.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="shot.h">
@@ -112,6 +109,21 @@
     </ClInclude>
     <ClInclude Include="ShotEnemyRandom.h">
       <Filter>ヘッダー ファイル\shot</Filter>
+    </ClInclude>
+    <ClInclude Include="villain.h">
+      <Filter>ヘッダー ファイル\villain</Filter>
+    </ClInclude>
+    <ClInclude Include="villainBase.h">
+      <Filter>ヘッダー ファイル\villain</Filter>
+    </ClInclude>
+    <ClInclude Include="villainFirst.h">
+      <Filter>ヘッダー ファイル\villain</Filter>
+    </ClInclude>
+    <ClInclude Include="backImg.h">
+      <Filter>ヘッダー ファイル\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMain.h">
+      <Filter>ヘッダー ファイル\scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

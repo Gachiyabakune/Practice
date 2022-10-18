@@ -209,7 +209,7 @@ bool Player::isCol(Enemy& enemy)
 bool Player::isColShot(ShotBase& shotBase)
 {
 	float playerLeft = getPos().x- kSizeX;	//ìñÇΩÇËîªíËí≤êÆÇÃÇΩÇﬂ-kSizeY
-	float playerRight = getPos().x + kSizeX;
+	float playerRight = getPos().x +;
 	float playerTop = getPos().y;
 	float playerBottom = getPos().y + kSizeY;
 

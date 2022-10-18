@@ -55,7 +55,7 @@ private:
 	Vec2 m_pos;
 	// ˆÚ“®
 	Vec2 m_vec;
-
+	//ƒTƒCƒY
 	Vec2 m_size;
 	//’e‚ğŒ‚‚Â‚ÌŠÔŠu
 	int m_shotInterval;
