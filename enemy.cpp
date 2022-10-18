@@ -53,7 +53,13 @@ void Enemy::update()
 		m_count == 240 ||m_count == 243 || m_count == 246 ||
 		m_count == 280 ||m_count == 283 || m_count == 286)
 	{
-		if (m_pMain->createShotEnemy(getPos()))
+		if (m_pMain->createShotEnemy1way(getPos()))
+		{
+		}
+		if (m_pMain->createShotEnemy2way(getPos()))
+		{
+		}
+		if (m_pMain->createShotEnemy3way(getPos()))
 		{
 		}
 	}

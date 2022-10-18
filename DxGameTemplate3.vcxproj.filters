@@ -31,6 +31,12 @@
     <Filter Include="ヘッダー ファイル\scene">
       <UniqueIdentifier>{2595d766-e001-4e78-803e-4e0d175ca24a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\shot\Shotnway">
+      <UniqueIdentifier>{795f20e4-5082-4782-a16b-33963fd8a1ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\shot\shotnway">
+      <UniqueIdentifier>{9bcc5683-31de-4a63-8cd3-660780e351d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="vec2.cpp">
@@ -49,9 +55,6 @@
       <Filter>ソース ファイル\shot</Filter>
     </ClCompile>
     <ClCompile Include="ShotBound.cpp">
-      <Filter>ソース ファイル\shot</Filter>
-    </ClCompile>
-    <ClCompile Include="ShotEenmyRandom.cpp">
       <Filter>ソース ファイル\shot</Filter>
     </ClCompile>
     <ClCompile Include="ShotEnemy.cpp">
@@ -77,6 +80,15 @@
     </ClCompile>
     <ClCompile Include="backImg.cpp">
       <Filter>ソース ファイル\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotEenmy3way.cpp">
+      <Filter>ソース ファイル\shot\shotnway</Filter>
+    </ClCompile>
+    <ClCompile Include="shotEnemy1way.cpp">
+      <Filter>ソース ファイル\shot\shotnway</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotEnemy2way.cpp">
+      <Filter>ソース ファイル\shot\shotnway</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,9 +119,6 @@
     <ClInclude Include="ShotNormal.h">
       <Filter>ヘッダー ファイル\shot</Filter>
     </ClInclude>
-    <ClInclude Include="ShotEnemyRandom.h">
-      <Filter>ヘッダー ファイル\shot</Filter>
-    </ClInclude>
     <ClInclude Include="villain.h">
       <Filter>ヘッダー ファイル\villain</Filter>
     </ClInclude>
@@ -124,6 +133,15 @@
     </ClInclude>
     <ClInclude Include="SceneMain.h">
       <Filter>ヘッダー ファイル\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotEnemy1way.h">
+      <Filter>ヘッダー ファイル\shot\Shotnway</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotEnemy2way.h">
+      <Filter>ヘッダー ファイル\shot\Shotnway</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotEnemy3way.h">
+      <Filter>ヘッダー ファイル\shot\Shotnway</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

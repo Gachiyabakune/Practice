@@ -159,8 +159,10 @@
     <ClCompile Include="shot.cpp" />
     <ClCompile Include="ShotBase.cpp" />
     <ClCompile Include="ShotBound.cpp" />
-    <ClCompile Include="ShotEenmyRandom.cpp" />
+    <ClCompile Include="ShotEenmy3way.cpp" />
     <ClCompile Include="ShotEnemy.cpp" />
+    <ClCompile Include="shotEnemy1way.cpp" />
+    <ClCompile Include="ShotEnemy2way.cpp" />
     <ClCompile Include="ShotNormal.cpp" />
     <ClCompile Include="vec2.cpp" />
     <ClCompile Include="villain.cpp" />
@@ -177,7 +179,9 @@
     <ClInclude Include="ShotBase.h" />
     <ClInclude Include="ShotBound.h" />
     <ClInclude Include="ShotEnemy.h" />
-    <ClInclude Include="ShotEnemyRandom.h" />
+    <ClInclude Include="ShotEnemy1way.h" />
+    <ClInclude Include="ShotEnemy2way.h" />
+    <ClInclude Include="ShotEnemy3way.h" />
     <ClInclude Include="ShotNormal.h" />
     <ClInclude Include="vec2.h" />
     <ClInclude Include="villain.h" />

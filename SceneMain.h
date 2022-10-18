@@ -28,7 +28,9 @@ public:
 	bool createShotNormal(Vec2 pos);
 	bool createShotEnemy(Vec2 pos);
 	bool createShotBound(Vec2 pos);
-	bool createShotEnmeyRandom(Vec2 pos);
+	bool createShotEnemy1way(Vec2 pos);
+	bool createShotEnemy2way(Vec2 pos);
+	bool createShotEnemy3way(Vec2 pos);
 
 	bool createVillainFirst(Vec2 pos);
 

@@ -82,6 +82,11 @@ void Player::update()
 				m_shotInterval = kShotInterval;
 				//PlaySoundMem(m_hShotSe, DX_PLAYTYPE_BACK, true);
 			}
+			if (m_pMain->createShotBound(getPos()))
+			{
+				m_shotInterval = kShotInterval;
+				//PlaySoundMem(m_hShotSe, DX_PLAYTYPE_BACK, true);
+			}
 		}
 		//’e‚ª0‚É‚È‚é‚ÆƒŠƒ[ƒh‚ğ‹²‚Ş------------------
 		if (m_count == 0)
@@ -209,7 +214,7 @@ bool Player::isCol(Enemy& enemy)
 bool Player::isColShot(ShotBase& shotBase)
 {
 	float playerLeft = getPos().x- kSizeX;	//“–‚½‚è”»’è’²®‚Ì‚½‚ß-kSizeY
-	float playerRight = getPos().x +;
+	float playerRight = getPos().x;
 	float playerTop = getPos().y;
 	float playerBottom = getPos().y + kSizeY;
 

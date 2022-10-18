@@ -2,13 +2,13 @@
 
 #include "ShotBase.h"
 
-class ShotEnemyRandom : public ShotBase
+class ShotEnemy2way : public ShotBase
 {
 public:
-	ShotEnemyRandom()
+	ShotEnemy2way()
 	{
 	}
-	virtual ~ShotEnemyRandom()
+	virtual ~ShotEnemy2way()
 	{
 	}
 
@@ -18,4 +18,7 @@ public:
 	virtual void update();
 
 private:
+
+	int shotCount;
+	int nway;
 };

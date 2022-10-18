@@ -3,7 +3,9 @@
 #include "ShotBound.h"
 #include "ShotNormal.h"
 #include "ShotEnemy.h"
-#include "ShotEnemyRandom.h"
+#include "ShotEnemy3way.h"
+#include "ShotEnemy1way.h"
+#include "ShotEnemy2way.h"
 #include "enemy.h"
 #include "backImg.h"
 #include "villainFirst.h"
@@ -285,9 +287,35 @@ bool SceneMain::createShotBound(Vec2 pos)
 	return true;
 }
 
-bool SceneMain::createShotEnmeyRandom(Vec2 pos)
+bool SceneMain::createShotEnemy1way(Vec2 pos)
 {
-	ShotEnemyRandom* pShot = new ShotEnemyRandom;
+	ShotEnemy1way* pShot = new ShotEnemy1way;
+	pShot->setHandle(m_hShotGraphic1);
+	pShot->start(pos);
+
+	pShot->setPlayerShot(false);		//Œ‚‚Á‚Ä‚¢‚é‚Ì‚ª“G‚©–¡•û‚©”»•Ê
+
+	m_pShotVt.push_back(pShot);
+
+	return true;
+}
+
+bool SceneMain::createShotEnemy2way(Vec2 pos)
+{
+	ShotEnemy2way* pShot = new ShotEnemy2way;
+	pShot->setHandle(m_hShotGraphic1);
+	pShot->start(pos);
+
+	pShot->setPlayerShot(false);		//Œ‚‚Á‚Ä‚¢‚é‚Ì‚ª“G‚©–¡•û‚©”»•Ê
+
+	m_pShotVt.push_back(pShot);
+
+	return true;
+}
+
+bool SceneMain::createShotEnemy3way(Vec2 pos)
+{
+	ShotEnemy3way* pShot = new ShotEnemy3way;
 	pShot->setHandle(m_hShotGraphic1);
 	pShot->start(pos);
 
