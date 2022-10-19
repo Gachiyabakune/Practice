@@ -155,7 +155,12 @@
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="SceneBase.cpp" />
+    <ClCompile Include="SceneEnd.cpp" />
     <ClCompile Include="SceneMain.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SceneTest.cpp" />
+    <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="shot.cpp" />
     <ClCompile Include="ShotBase.cpp" />
     <ClCompile Include="ShotBound.cpp" />
@@ -174,7 +179,12 @@
     <ClInclude Include="enemy.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="SceneBase.h" />
+    <ClInclude Include="SceneEnd.h" />
     <ClInclude Include="SceneMain.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SceneTest.h" />
+    <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="shot.h" />
     <ClInclude Include="ShotBase.h" />
     <ClInclude Include="ShotBound.h" />

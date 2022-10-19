@@ -7,22 +7,25 @@
 #include "backImg.h"
 #include "villainBase.h"
 
-class SceneMain
+#include "SceneBase.h"
+
+class SceneMain : public SceneBase
 {
 public:
 	SceneMain();
+		
 	virtual ~SceneMain();
 
 	// 初期化
-	void init();
+	virtual void init();
 	// 終了処理
-	void end();
+	virtual void end();
 
 	//void count();
 	// 毎フレームの処理
-	bool update();
+	virtual SceneBase* update();
 	// 毎フレームの描画
-	void draw();
+	virtual void draw();
 
 	//弾の生成
 	bool createShotNormal(Vec2 pos);
@@ -34,6 +37,7 @@ public:
 
 	bool createVillainFirst(Vec2 pos);
 
+	virtual bool isEnd() { return m_isEnd; }
 private:
 
 	// プレイヤーのグラフィックハンドル
@@ -65,4 +69,12 @@ private:
 
 	int m_frame;		//計測用の変数
 	int m_hitFrame;   //無敵フレーム
+
+	int frame;
+
+	// テキスト表示位置変更
+	int m_textPosX;
+	int m_textVecX;
+
+	bool m_isEnd;
 };

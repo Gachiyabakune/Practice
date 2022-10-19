@@ -82,11 +82,6 @@ void Player::update()
 				m_shotInterval = kShotInterval;
 				//PlaySoundMem(m_hShotSe, DX_PLAYTYPE_BACK, true);
 			}
-			if (m_pMain->createShotBound(getPos()))
-			{
-				m_shotInterval = kShotInterval;
-				//PlaySoundMem(m_hShotSe, DX_PLAYTYPE_BACK, true);
-			}
 		}
 		//’e‚ª0‚É‚È‚é‚ÆƒŠƒ[ƒh‚ğ‹²‚Ş------------------
 		if (m_count == 0)

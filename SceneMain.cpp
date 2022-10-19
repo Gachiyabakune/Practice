@@ -11,6 +11,11 @@
 #include "villainFirst.h"
 #include <cassert>
 
+#include "SceneTitle.h"
+#include "SceneTest.h"
+#include "SceneEnd.h"
+
+
 namespace
 {
 	//ショットの発射間隔
@@ -37,9 +42,14 @@ SceneMain::SceneMain()
 	m_count = 0;
 	m_life = kLife;
 
+	frame = 0;
 	m_frame = 0;	
 	m_hitFrame = 0;
 	m_RepelNum = 0;
+
+	m_textPosX = 0;
+	m_textVecX = 4;
+	m_isEnd = false;
 }
 
 SceneMain::~SceneMain()
@@ -56,12 +66,12 @@ void SceneMain::init()
 
 	//弾の画像
 	m_hShotGraphic = LoadGraph("data/ice.png");
-	m_hShotGraphic1 = LoadGraph("data/shot.bmp");
+	m_hShotGraphic1 = LoadGraph("data/shot.png");
 	//敵の画像
 	m_hEnemyGraphic = LoadGraph("data/kumomitu.png");
 	//サウンドのロード
-	m_hTestSound = LoadSoundMem("sound/yonesound.mp3");
-	//
+	m_hTestSound = LoadSoundMem("sound/yone.mp3");
+	//敵の画像
 	m_VillainGraphic = LoadGraph("data/yone.png");
 
 	for (int i = 0; i < Player::kGraphicDivNum; i++)
@@ -108,18 +118,15 @@ void SceneMain::end()
 }
 
 // 毎フレームの処理
-bool SceneMain::update()
+SceneBase* SceneMain::update()
 {
 	int padState = GetJoypadInputState(DX_INPUT_KEY_PAD1);
-	if(padState & PAD_INPUT_1)
-	{
-		PlaySoundMem(m_hTestSound, DX_PLAYTYPE_BACK, true);
-	}
 
 	m_backImg.update();
 	m_player.update();
 	m_enemy.update();
 
+	frame++;
 	std::vector<ShotBase*>::iterator it = m_pShotVt.begin();
 	std::vector<VillainBase*>::iterator its = m_villainVt.begin();
 	while (it != m_pShotVt.end())
@@ -145,7 +152,9 @@ bool SceneMain::update()
 				m_hitFrame--;		//無敵フレームを減らす
 			}
 		}
-		//----------------------------------------
+		//--------------------------------------
+		// 
+		//自分の弾の当たり判定------------------
 
 		if (m_player.isColShot(*pShot))
 		{
@@ -216,7 +225,18 @@ bool SceneMain::update()
 		m_frame = 0;
 	}
 
-	return false;
+	//オプション画面
+	/*if (padState & PAD_INPUT_8)
+	{
+		return(new SceneTest);
+	}*/
+	//終了判定
+	if (frame > 12000 || m_life == 0)
+	{
+		//DxLib_End();
+		return (new SceneEnd);
+	}
+	return this;
 }
 
 // 毎フレームの描画
@@ -246,6 +266,7 @@ void SceneMain::draw()
 	DrawFormatString(460, 80, GetColor(255, 255, 255), "LIFE:%d", m_life);
 	//
 	DrawFormatString(460, 100, GetColor(255, 255, 255), "ENERGY:%d", m_count);
+	DrawFormatString(460, 140, GetColor(255, 255, 255), "%d", frame);
 }
 
 bool SceneMain::createShotNormal(Vec2 pos)

@@ -7,7 +7,7 @@ namespace
 	constexpr float kShotSpeed = 8.0f;
 
 	//跳ね返り回数
-	constexpr int kBoundMax = 3;
+	constexpr int kBoundMax = 1;
 
 	//グラフィックデータのサイズ
 	constexpr int kSizeX = 16;

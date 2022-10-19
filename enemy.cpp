@@ -41,6 +41,8 @@ void Enemy::init()
 
 void Enemy::update()
 {
+	if (m_isDead) return;
+
 	m_count++;		//カウント
 	
 	//ゲーム開始時画面上から出現し決められた時間になるとその場所で止まる
