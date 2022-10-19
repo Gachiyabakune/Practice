@@ -82,7 +82,6 @@ void Enemy::update()
 			m_isDead = true;
 		}
 	}
-	
 }
 
 

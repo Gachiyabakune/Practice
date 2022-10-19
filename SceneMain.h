@@ -6,7 +6,7 @@
 #include "enemy.h"
 #include "backImg.h"
 #include "villainBase.h"
-
+#include "Vec2.h"
 #include "SceneBase.h"
 
 class SceneMain : public SceneBase
@@ -37,6 +37,7 @@ public:
 
 	bool createVillainFirst(Vec2 pos);
 
+	Vec2 getPos() const { return m_pos; }
 	virtual bool isEnd() { return m_isEnd; }
 private:
 
@@ -55,7 +56,7 @@ private:
 	Back m_backImg;
 	// ショット
 	std::vector<ShotBase*> m_pShotVt;
-	//
+	//敵
 	std::vector<VillainBase*> m_villainVt;
 
 	//サウンドハンドル
@@ -77,4 +78,6 @@ private:
 	int m_textVecX;
 
 	bool m_isEnd;
+
+	Vec2 m_pos;
 };

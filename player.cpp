@@ -5,6 +5,8 @@
 #include "shot.h"
 #include "ShotBase.h"
 #include "SceneMain.h"
+#include "villainBase.h"
+#include "villain.h"
 
 namespace
 {
@@ -53,7 +55,7 @@ void Player::init()
 	m_animeFrame = 0;
 	m_motion = 3;
 	m_shotInterval = 0;
-	m_energy = 00;
+	m_energy = 500;
 	m_count = kShotMagazine;
 	m_reload = 0;
 
@@ -96,14 +98,14 @@ void Player::update()
 		//----------------------------------------------
 
 		//ƒoƒEƒ“ƒh’e
-		if (padState & PAD_INPUT_2 && m_energy >= 500)
-		{
-			if (m_pMain->createShotBound(getPos()))
-			{
-				m_shotInterval = kShotInterval;
-				//PlaySoundMem(m_hShotSe, DX_PLAYTYPE_BACK, true);
-			}
-		}
+		//if (padState & PAD_INPUT_2 && m_energy >= 500)
+		//{
+		//	if (m_pMain->createVillainFirst(getPos()))
+		//	{
+		//		m_shotInterval = kShotInterval;
+		//		//PlaySoundMem(m_hShotSe, DX_PLAYTYPE_BACK, true);
+		//	}
+		//}
 		//‰üC’†
 		//if (padState & PAD_INPUT_3)
 		//{

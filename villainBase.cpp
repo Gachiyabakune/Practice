@@ -3,7 +3,7 @@
 
 namespace
 {
-	//弾のサイズ
+	//敵のサイズ
 	//修正--------------------------------------------
 	constexpr float kSizeX = 64.0;
 	constexpr float kSizeY = 64.0;

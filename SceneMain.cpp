@@ -50,6 +50,9 @@ SceneMain::SceneMain()
 	m_textPosX = 0;
 	m_textVecX = 4;
 	m_isEnd = false;
+
+	m_pos.x = 0;
+	m_pos.y = 0;
 }
 
 SceneMain::~SceneMain()
@@ -85,7 +88,10 @@ void SceneMain::init()
 	m_enemy.init();
 	m_enemy.setMain(this);
 
-
+	//敵クラスを呼び出し
+	if (createVillainFirst(getPos()))
+	{
+	}
 
 }
 
@@ -131,7 +137,7 @@ SceneBase* SceneMain::update()
 
 	frame++;
 	std::vector<ShotBase*>::iterator it = m_pShotVt.begin();
-	std::vector<VillainBase*>::iterator its = m_villainVt.begin();
+	
 	while (it != m_pShotVt.end())
 	{
 		auto& pShot = (*it);
@@ -160,15 +166,12 @@ SceneBase* SceneMain::update()
 	
 		//自分の弾の当たり判定-------------------------------------------
 
-		if (m_player.isColShot(*pShot))
+		if (m_player.isColShot(*pShot)&& m_hitFrame == 0)	//無敵じゃないとき
 		{
 			m_player.setDead(true);	//キャラが死亡
+			m_life--;	//死亡時ライフを一つ減らす
 
-			if (m_hitFrame == 0)	//1回の当たり判定時に１回しかライフは減らさない
-			{
-				m_life--;	//死亡時ライフを一つ減らす
-			}
-			m_hitFrame = 20;	//無敵時間20フレーム
+			m_hitFrame = 60;	//無敵時間20フレーム
 
 			if (m_hitFrame != 0)	//死んでいる時
 			{
@@ -190,7 +193,7 @@ SceneBase* SceneMain::update()
 		//------------------------------------------------------------
 	}
 
-
+	std::vector<VillainBase*>::iterator its = m_villainVt.begin();
 	//敵クラスの処理------------------------------------------------
 	while(its != m_villainVt.end())
 	{

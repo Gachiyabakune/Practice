@@ -3,7 +3,7 @@
 
 namespace
 {
-	constexpr float kShotSpeed = 2.0f;
+	constexpr float kShotSpeed = 0.5f;
 }
 
 void VillainFirst::start(Vec2 pos)
@@ -20,7 +20,7 @@ void VillainFirst::update()
 	m_pos += m_vec;
 
 	//âÊñ äOÇ…çsÇ¡ÇΩèÍçá
-	if (m_pos.y < 0)
+	if (m_pos.y > 420)
 	{
 		m_isExist = false;
 	}
