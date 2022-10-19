@@ -18,7 +18,7 @@ void ShotBound::start(Vec2 pos)
 {
 	ShotBase::start(pos);
 
-	float randAngle = static_cast<float>(GetRand(359));
+	float randAngle = static_cast<float>(GetRand(179));
 	float rad = randAngle * 3.14159f / 180.0;			//ラジアン変換
 
 	m_vec.x = cosf(rad);
@@ -31,55 +31,5 @@ void ShotBound::start(Vec2 pos)
 void ShotBound::update()
 {
 	if (!m_isExist)return;
-	m_pos += m_vec;
-
-	if (m_boundCount < kBoundMax)
-	{
-		//画面端での反射
-		if (m_pos.x < -16.0f)
-		{
-			m_pos.x = 0.0f;
-			m_vec.x *= -1.0f;
-			m_boundCount++;
-		}
-		if (m_pos.y < -16.0f)
-		{
-			m_pos.y = 0.0f;
-			m_vec.y *= -1.0f;
-			m_boundCount++;
-		}
-		if (m_pos.x > Game::kScreenWidth - kSizeX - 180)
-		{
-			m_pos.x = Game::kScreenWidth - kSizeX - 180;
-			m_vec.x *= -1.0f;
-			m_boundCount++;
-		}
-		if (m_pos.y > Game::kScreenHight - kSizeX)
-		{
-			m_pos.y = Game::kScreenHight - kSizeX;
-			m_vec.y *= -1.0f;
-			m_boundCount++;
-		}
-	}
-	else
-	{
-		//画面外にいったショットの終了処理
-		if (m_pos.x > (0 - kSizeX))
-		{
-			m_isExist = false;
-		}
-		if (m_pos.x > (0 - kSizeY))
-		{
-			m_isExist = false;
-		}
-
-		if (m_pos.y > Game::kScreenHight)
-		{
-			m_isExist = false;
-		}
-		if (m_pos.y > Game::kScreenHight)
-		{
-			m_isExist = false;
-		}
-	}
+	m_pos -= m_vec;
 }

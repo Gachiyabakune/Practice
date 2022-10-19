@@ -53,7 +53,7 @@ void Player::init()
 	m_animeFrame = 0;
 	m_motion = 3;
 	m_shotInterval = 0;
-	m_energy = 500;
+	m_energy = 00;
 	m_count = kShotMagazine;
 	m_reload = 0;
 

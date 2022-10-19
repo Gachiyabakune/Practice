@@ -19,6 +19,7 @@ Enemy::Enemy()
 	
 	m_size.x = kSizeX;
 	m_size.y = kSizeY;
+	
 }
 
 Enemy::~Enemy()
@@ -41,6 +42,13 @@ void Enemy::init()
 
 void Enemy::update()
 {
+	//死んでいたら画面外に飛ばす
+	if (m_isDead)
+	{
+		m_pos.y = -1000;
+		return;
+	}
+
 	if (m_isDead) return;
 
 	m_count++;		//カウント
@@ -52,8 +60,8 @@ void Enemy::update()
 	}
 
 	if (m_count == 200 ||m_count == 203 || m_count == 206 ||
-		m_count == 240 ||m_count == 243 || m_count == 246 ||
-		m_count == 280 ||m_count == 283 || m_count == 286)
+		m_count == 260 ||m_count == 263 || m_count == 266 ||
+		m_count == 320 ||m_count == 323 || m_count == 326)
 	{
 		if (m_pMain->createShotEnemy1way(getPos()))
 		{
@@ -74,11 +82,7 @@ void Enemy::update()
 			m_isDead = true;
 		}
 	}
-	//死んでいたら画面外に飛ばす
-	if (m_isDead)
-	{
-		m_pos.y = -100;
-	}
+	
 }
 
 

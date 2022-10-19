@@ -84,6 +84,9 @@ void SceneMain::init()
 	m_enemy.setHandle(m_hEnemyGraphic);
 	m_enemy.init();
 	m_enemy.setMain(this);
+
+
+
 }
 
 // 終了処理
@@ -133,6 +136,7 @@ SceneBase* SceneMain::update()
 	{
 		auto& pShot = (*it);
 		assert(pShot);
+	
 		pShot->update()
 			;
 		//敵の死亡判定---------------------------
@@ -152,9 +156,9 @@ SceneBase* SceneMain::update()
 				m_hitFrame--;		//無敵フレームを減らす
 			}
 		}
-		//--------------------------------------
-		// 
-		//自分の弾の当たり判定------------------
+		//---------------------------------------------------------------
+	
+		//自分の弾の当たり判定-------------------------------------------
 
 		if (m_player.isColShot(*pShot))
 		{
@@ -182,7 +186,12 @@ SceneBase* SceneMain::update()
 			continue;
 		}
 		it++;
+
+		//------------------------------------------------------------
 	}
+
+
+	//敵クラスの処理------------------------------------------------
 	while(its != m_villainVt.end())
 	{
 		auto& pVillain = (*its);
@@ -199,8 +208,10 @@ SceneBase* SceneMain::update()
 		}
 		its++;
 	}
+	//-------------------------------------------------------------
 
-	//自キャラの判定---------------------------------
+
+	//自キャラの判定-----------------------------------------------
 	if (m_player.isCol(m_enemy))
 	{
 		m_player.setDead(true);	//キャラが死亡
@@ -219,7 +230,7 @@ SceneBase* SceneMain::update()
 	{
 		m_frame++;			//死んでいるとき1ずつカウント
 	}
-	if (m_frame == 60)		//カウントがたまるとキャラが復活
+	if (m_frame == 30)		//カウントがたまるとキャラが復活
 	{
 		m_player.setDead(false);
 		m_frame = 0;
@@ -233,8 +244,7 @@ SceneBase* SceneMain::update()
 	//終了判定
 	if (frame > 12000 || m_life == 0)
 	{
-		//DxLib_End();
-		return (new SceneEnd);
+		return (new SceneEnd);		//条件達成すると終了画面に移る
 	}
 	return this;
 }
@@ -269,6 +279,8 @@ void SceneMain::draw()
 	DrawFormatString(460, 140, GetColor(255, 255, 255), "%d", frame);
 }
 
+
+//弾の生成--------------------------------------------------------------
 bool SceneMain::createShotNormal(Vec2 pos)
 {
 	ShotNormal* pShot = new ShotNormal;
@@ -346,6 +358,7 @@ bool SceneMain::createShotEnemy3way(Vec2 pos)
 
 	return true;
 }
+//-------------------------------------------------
 
 bool SceneMain::createVillainFirst(Vec2 pos)
 {
