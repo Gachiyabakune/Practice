@@ -39,7 +39,7 @@ protected:
 
 	Vec2 m_size;
 	//ë∂ç›Ç∑ÇÈÇ©
-	bool    m_isExist;
+	bool m_isExist;
 
 	bool m_isDead;
 

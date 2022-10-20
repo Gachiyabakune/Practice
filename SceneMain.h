@@ -61,7 +61,6 @@ private:
 	//敵
 	std::vector<VillainBase*> m_villainVt;
 
-
 	//サウンドハンドル
 	int m_hTestSound;
 	//カウント用
