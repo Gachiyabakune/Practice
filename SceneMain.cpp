@@ -30,27 +30,25 @@ namespace
 
 SceneMain::SceneMain()
 {
-	for (auto& handle : m_hPlayerGraphic)
+	/*for (auto& handle : m_hPlayerGraphic)
 	{
 		handle = -1;
-	}
-	m_hShotGraphic = -1;
+	}*/
+	m_hShotGraphic = -1;		
 	m_hShotGraphic1 = -1;
 	m_hTestSound = -1;
 	m_hEnemyGraphic = -1;
 	m_VillainGraphic = -1;
-	m_count = 0;
-	m_life = kLife;
 
-	frame = 0;
-	m_frame = 0;	
-	m_hitFrame = 0;
-	m_RepelNum = 0;
+	m_count = 0;		//スコア
+	m_life = kLife;		//ライフ
 
-	m_textPosX = 0;
-	m_textVecX = 4;
-	m_isEnd = false;
+	m_enedFrame = 0;	//終了フレーム
+	m_frame = 0;		//キャラが復活するためのフレーム
+	m_hitFrame = 0;		//無敵時間
+	m_RepelNum = 0;		//討伐数
 
+	//敵の座標
 	m_pos.x = 0;
 	m_pos.y = 0;
 }
@@ -133,9 +131,9 @@ SceneBase* SceneMain::update()
 
 	m_backImg.update();
 	m_player.update();
-	m_enemy.update();
+	//m_enemy.update();
 
-	frame++;
+	m_enedFrame++;
 	std::vector<ShotBase*>::iterator it = m_pShotVt.begin();
 	
 	while (it != m_pShotVt.end())
@@ -143,27 +141,30 @@ SceneBase* SceneMain::update()
 		auto& pShot = (*it);
 		assert(pShot);
 	
-		pShot->update()
-			;
-		//敵の死亡判定---------------------------
-		if (m_enemy.isCol(*pShot))
+		pShot->update();
+
+		for (auto& pVillain : m_villainVt)
 		{
-			m_enemy.setDead(true);	//キャラが死亡
-
-			if (m_hitFrame == 0)	//1回の当たり判定時に１回しかライフは減らさない
+			//敵の死亡判定---------------------------
+			if (pVillain->isCol(*pShot))
 			{
-				//PlaySoundMem(m_hTestSound, DX_PLAYTYPE_NORMAL,true);
-				m_RepelNum++;		//討伐数カウント
-			}
-			m_hitFrame = 20;	//無敵時間20フレーム
+				pVillain->setDead(true);	//キャラが死亡
 
-			if (m_hitFrame != 0)	//死んでいる時
-			{
-				m_hitFrame--;		//無敵フレームを減らす
+				if (m_hitFrame == 0)	//1回の当たり判定時に１回しかライフは減らさない
+				{
+					//PlaySoundMem(m_hTestSound, DX_PLAYTYPE_NORMAL,true);
+					m_RepelNum++;		//討伐数カウント
+				}
+				m_hitFrame = 20;	//無敵時間20フレーム
+
+				if (m_hitFrame != 0)	//死んでいる時
+				{
+					m_hitFrame--;		//無敵フレームを減らす
+				}
 			}
+			//------------------------------------------
 		}
-		//---------------------------------------------------------------
-	
+		
 		//自分の弾の当たり判定-------------------------------------------
 
 		if (m_player.isColShot(*pShot)&& m_hitFrame == 0)	//無敵じゃないとき
@@ -245,7 +246,7 @@ SceneBase* SceneMain::update()
 		return(new SceneTest);
 	}*/
 	//終了判定
-	if (frame > 12000 || m_life == 0)
+	if (m_enedFrame > 12000 || m_life == 0)
 	{
 		return (new SceneEnd);		//条件達成すると終了画面に移る
 	}
@@ -257,7 +258,7 @@ void SceneMain::draw()
 {
 	m_backImg.draw();
 	m_player.draw();
-	m_enemy.draw();
+	//m_enemy.draw();
 
 	for (auto& pShot : m_pShotVt)
 	{
@@ -279,7 +280,7 @@ void SceneMain::draw()
 	DrawFormatString(460, 80, GetColor(255, 255, 255), "LIFE:%d", m_life);
 	//
 	DrawFormatString(460, 100, GetColor(255, 255, 255), "ENERGY:%d", m_count);
-	DrawFormatString(460, 140, GetColor(255, 255, 255), "%d", frame);
+	DrawFormatString(460, 140, GetColor(255, 255, 255), "%d", m_enedFrame);
 }
 
 
@@ -366,7 +367,8 @@ bool SceneMain::createShotEnemy3way(Vec2 pos)
 bool SceneMain::createVillainFirst(Vec2 pos)
 {
 	VillainFirst* pVillain = new VillainFirst;
-	pVillain->setHandle(m_VillainGraphic);
+	pVillain->setHandle(m_hEnemyGraphic);
+	pVillain->setMain(this);
 	pVillain->start(pos);
 	m_villainVt.push_back(pVillain);
 

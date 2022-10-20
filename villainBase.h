@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Vec2.h"
+#include "ShotBase.h"
 
 class VillainBase
 {
@@ -23,6 +24,10 @@ public:
 	Vec2 getPos() const { return m_pos; }
 	Vec2 getSize() const { return m_size; }
 
+	bool isCol(ShotBase& shotBase);
+	//死亡設定
+	void setDead(bool isDead) { m_isDead = isDead; }
+
 	//継承先からも使えるようになる
 protected:
 	// グラフィックハンドル
@@ -35,5 +40,7 @@ protected:
 	Vec2 m_size;
 	//存在するか
 	bool    m_isExist;
+
+	bool m_isDead;
 
 };

@@ -54,10 +54,13 @@ private:
 	Enemy m_enemy;
 	//背景
 	Back m_backImg;
+
+	//VillainFirst m_villain;
 	// ショット
 	std::vector<ShotBase*> m_pShotVt;
 	//敵
 	std::vector<VillainBase*> m_villainVt;
+
 
 	//サウンドハンドル
 	int m_hTestSound;
@@ -71,11 +74,7 @@ private:
 	int m_frame;		//計測用の変数
 	int m_hitFrame;   //無敵フレーム
 
-	int frame;
-
-	// テキスト表示位置変更
-	int m_textPosX;
-	int m_textVecX;
+	int m_enedFrame;
 
 	bool m_isEnd;
 
