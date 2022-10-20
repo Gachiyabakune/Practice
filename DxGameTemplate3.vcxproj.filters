@@ -51,9 +51,6 @@
     <ClCompile Include="player.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="enemy.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="shot.cpp">
       <Filter>ソース ファイル\shot</Filter>
     </ClCompile>
@@ -111,18 +108,21 @@
     <ClCompile Include="SceneEnd.cpp">
       <Filter>ソース ファイル\Title</Filter>
     </ClCompile>
+    <ClCompile Include="SceneGameOver.cpp">
+      <Filter>ヘッダー ファイル\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="villainSecond.cpp">
+      <Filter>ソース ファイル\villain</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotEnemySideR.cpp">
+      <Filter>ソース ファイル\shot</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="vec2.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="player.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="enemy.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="shot.h">
@@ -178,6 +178,18 @@
     </ClInclude>
     <ClInclude Include="SceneEnd.h">
       <Filter>ヘッダー ファイル\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameOver.h">
+      <Filter>ヘッダー ファイル\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="villainSecond.h">
+      <Filter>ヘッダー ファイル\villain</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotEnemySideR.h">
+      <Filter>ヘッダー ファイル\shot</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

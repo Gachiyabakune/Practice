@@ -1,7 +1,6 @@
 #include "DxLib.h"
 #include "game.h"
 #include "player.h"
-#include "enemy.h"
 #include "shot.h"
 #include "ShotBase.h"
 #include "SceneMain.h"
@@ -98,14 +97,13 @@ void Player::update()
 		//----------------------------------------------
 
 		//ƒoƒEƒ“ƒh’e
-		//if (padState & PAD_INPUT_2 && m_energy >= 500)
-		//{
-		//	if (m_pMain->createVillainFirst(getPos()))
-		//	{
-		//		m_shotInterval = kShotInterval;
-		//		//PlaySoundMem(m_hShotSe, DX_PLAYTYPE_BACK, true);
-		//	}
-		//}
+		/*if (padState & PAD_INPUT_2 && m_energy >= 500)
+		{
+			if (m_pMain->createShotEnemySideR(getPos()))
+			{
+				m_shotInterval = kShotInterval;
+			}
+		}*/
 		//‰üC’†
 		//if (padState & PAD_INPUT_3)
 		//{
@@ -187,17 +185,17 @@ void Player::draw()
 }
 
 //“G‚ÆŽ©•ª‚ÌƒLƒƒƒ‰‚Ì”»’è
-bool Player::isCol(Enemy& enemy)
+bool Player::isCol(VillainBase& villainBase)
 {
 	float playerLeft = getPos().x;
 	float playerRight = getPos().x + kSizeX;
 	float playerTop = getPos().y;
 	float playerBottom = getPos().y + kSizeY;
 
-	float enemyLeft = enemy.getPos().x;
-	float enemyRight = enemy.getPos().x + enemy.getSize().x;
-	float enemyTop = enemy.getPos().y;
-	float enemyBottom = enemy.getPos().y + enemy.getSize().y;
+	float enemyLeft = villainBase.getPos().x;
+	float enemyRight = villainBase.getPos().x + villainBase.getSize().x;
+	float enemyTop = villainBase.getPos().y;
+	float enemyBottom = villainBase.getPos().y + villainBase.getSize().y;
 
 	if (playerLeft > enemyRight)	return false;
 	if (playerRight < enemyLeft)	return false;

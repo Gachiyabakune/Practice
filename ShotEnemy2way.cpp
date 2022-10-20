@@ -36,8 +36,6 @@ void ShotEnemy2way::update()
 	{
 		m_pos += m_vec;
 
-
-
 		//‰æ–ÊŠO‚És‚Á‚½ê‡
 		if (m_pos.y > 480 || m_pos.x > 640 || m_pos.x < 0)
 		{

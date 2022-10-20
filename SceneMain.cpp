@@ -6,14 +6,16 @@
 #include "ShotEnemy3way.h"
 #include "ShotEnemy1way.h"
 #include "ShotEnemy2way.h"
-#include "enemy.h"
+#include "ShotEnemySideR.h"
 #include "backImg.h"
 #include "villainFirst.h"
+#include "villainSecond.h"
 #include <cassert>
 
 #include "SceneTitle.h"
 #include "SceneTest.h"
 #include "SceneEnd.h"
+#include "SceneGameOver.h"
 
 
 namespace
@@ -22,7 +24,13 @@ namespace
 	constexpr int kShotInterval = 16;
 
 	//ライフ
-	constexpr int kLife = 3;
+	constexpr int kLife = 10;
+
+	//討伐数
+	constexpr int kEndNum = 3;
+
+	//制限時間
+	constexpr int kLimitTime = 1080;
 
 	//グラフィックファイル名
 	const char* const kPlayerGraphicFilename = "data/kawamoto.png";
@@ -45,12 +53,13 @@ SceneMain::SceneMain()
 
 	m_enedFrame = 0;	//終了フレーム
 	m_frame = 0;		//キャラが復活するためのフレーム
-	m_hitFrame = 0;		//無敵時間
+	m_hitFrameP = 0;		//無敵時間
+	m_hitFrameV = 0;
 	m_RepelNum = 0;		//討伐数
 
 	//敵の座標
-	m_pos.x = 0;
-	m_pos.y = 0;
+	x = 188.5f;
+	y = 0.0f;
 }
 
 SceneMain::~SceneMain()
@@ -70,10 +79,9 @@ void SceneMain::init()
 	m_hShotGraphic1 = LoadGraph("data/shot.png");
 	//敵の画像
 	m_hEnemyGraphic = LoadGraph("data/kumomitu.png");
+	m_VillainGraphic = LoadGraph("data/ideti.png");
 	//サウンドのロード
 	m_hTestSound = LoadSoundMem("sound/yone.mp3");
-	//敵の画像
-	m_VillainGraphic = LoadGraph("data/yone.png");
 
 	for (int i = 0; i < Player::kGraphicDivNum; i++)
 	{
@@ -81,16 +89,47 @@ void SceneMain::init()
 	}
 	m_player.init();
 	m_player.setMain(this);
-
-	m_enemy.setHandle(m_hEnemyGraphic);
-	m_enemy.init();
-	m_enemy.setMain(this);
-
-	//敵クラスを呼び出し
-	if (createVillainFirst(getPos()))
+	Vec2 pos;
+	for (int i = 0; i < 5; i++)
 	{
-	}
+		if (i <= 3)
+		{
+			//1体目
+			if (i == 0)
+			{
+				pos.x = 188.5f;
+				pos.y = -100.0f;
+			}
+			//2体目
+			else if (i == 1)
+			{
+				pos.x = 328.5f;
+				pos.y = -100.0f;
+			}
+			//3体目
+			else if (i == 2)
+			{
+				pos.x = 48.5f;
+				pos.y = -100.0f;
+			}
+			//敵クラスを呼び出し
+			if (createVillainFirst(pos))
+			{
+			}
+		}
+		else
+		{
+			if (i == 4)
+			{
+				pos.x = 0.0f;
+				pos.y = -100.0f;
+			}
+			if (createVillainSecond(pos))
+			{
 
+			}
+		}
+	}
 }
 
 // 終了処理
@@ -131,7 +170,6 @@ SceneBase* SceneMain::update()
 
 	m_backImg.update();
 	m_player.update();
-	//m_enemy.update();
 
 	m_enedFrame++;
 	std::vector<ShotBase*>::iterator it = m_pShotVt.begin();
@@ -150,34 +188,30 @@ SceneBase* SceneMain::update()
 			{
 				pVillain->setDead(true);	//キャラが死亡
 
-				if (m_hitFrame == 0)	//1回の当たり判定時に１回しかライフは減らさない
+				if (m_hitFrameV == 0)	//1回の当たり判定時に１回しかライフは減らさない
 				{
 					//PlaySoundMem(m_hTestSound, DX_PLAYTYPE_NORMAL,true);
 					m_RepelNum++;		//討伐数カウント
+					m_count += 100;
 				}
-				m_hitFrame = 20;	//無敵時間20フレーム
-
-				if (m_hitFrame != 0)	//死んでいる時
-				{
-					m_hitFrame--;		//無敵フレームを減らす
-				}
+				m_hitFrameV = 10;	//無敵時間20フレーム
 			}
 			//------------------------------------------
 		}
 		
+		if (m_hitFrameV != 0)	//死んでいる時
+		{
+			m_hitFrameV--;		//無敵フレームを減らす
+		}
+
 		//自分の弾の当たり判定-------------------------------------------
 
-		if (m_player.isColShot(*pShot)&& m_hitFrame == 0)	//無敵じゃないとき
+		if (m_player.isColShot(*pShot)&& m_hitFrameP == 0)	//無敵じゃないとき
 		{
-			m_player.setDead(true);	//キャラが死亡
+			//m_player.setDead(true);	//キャラが死亡
 			m_life--;	//死亡時ライフを一つ減らす
 
-			m_hitFrame = 60;	//無敵時間20フレーム
-
-			if (m_hitFrame != 0)	//死んでいる時
-			{
-				m_hitFrame--;		//無敵フレームを減らす
-			}
+			m_hitFrameP = 40;	//無敵時間20フレーム
 		}
 
 		if (!pShot->isExist())
@@ -194,6 +228,20 @@ SceneBase* SceneMain::update()
 		//------------------------------------------------------------
 	}
 
+	if (m_hitFrameP != 0)	//死んでいる時
+	{
+		m_hitFrameP--;		//無敵フレームを減らす
+	}
+	if (true)
+	{
+		m_frame++;			//死んでいるとき1ずつカウント
+	}
+	if (m_frame == 30)		//カウントがたまるとキャラが復活
+	{
+		m_player.setDead(false);
+		m_frame = 0;
+	}
+
 	std::vector<VillainBase*>::iterator its = m_villainVt.begin();
 	//敵クラスの処理------------------------------------------------
 	while(its != m_villainVt.end())
@@ -201,6 +249,18 @@ SceneBase* SceneMain::update()
 		auto& pVillain = (*its);
 		assert(pVillain);
 		pVillain->update();
+
+		if (m_player.isCol(*pVillain))
+		{
+			m_player.setDead(true);	//キャラが死亡
+
+			if (m_hitFrameP == 0)	//1回の当たり判定時に１回しかライフは減らさない
+			{
+				m_life--;	//死亡時ライフを一つ減らす
+			}
+			m_hitFrameP = 20;	//無敵時間20フレーム
+		}
+
 		if (!pVillain->isExist())
 		{
 			delete pVillain;
@@ -216,19 +276,10 @@ SceneBase* SceneMain::update()
 
 
 	//自キャラの判定-----------------------------------------------
-	if (m_player.isCol(m_enemy))
+	
+	if (m_hitFrameP != 0)	//死んでいる時
 	{
-		m_player.setDead(true);	//キャラが死亡
-
-		if (m_hitFrame == 0)	//1回の当たり判定時に１回しかライフは減らさない
-		{
-			m_life--;	//死亡時ライフを一つ減らす
-		}
-		m_hitFrame = 20;	//無敵時間20フレーム
-	}
-	if (m_hitFrame != 0)	//死んでいる時
-	{
-		m_hitFrame--;		//無敵フレームを減らす
+		m_hitFrameP--;		//無敵フレームを減らす
 	}
 	if (true)
 	{
@@ -245,10 +296,16 @@ SceneBase* SceneMain::update()
 	{
 		return(new SceneTest);
 	}*/
-	//終了判定
-	if (m_enedFrame > 12000 || m_life == 0)
+
+	//終了判定--------------------------------------------------
+	if (m_RepelNum >= kEndNum)
 	{
 		return (new SceneEnd);		//条件達成すると終了画面に移る
+	}
+
+	if (m_life == 0 || m_count > kLimitTime)
+	{
+		return (new SceneGameOver);
 	}
 	return this;
 }
@@ -280,7 +337,7 @@ void SceneMain::draw()
 	DrawFormatString(460, 80, GetColor(255, 255, 255), "LIFE:%d", m_life);
 	//
 	DrawFormatString(460, 100, GetColor(255, 255, 255), "ENERGY:%d", m_count);
-	DrawFormatString(460, 140, GetColor(255, 255, 255), "%d", m_enedFrame);
+	//DrawFormatString(460, 140, GetColor(255, 255, 255), "%d", m_hitFrame);
 }
 
 
@@ -362,12 +419,36 @@ bool SceneMain::createShotEnemy3way(Vec2 pos)
 
 	return true;
 }
+
+bool SceneMain::createShotEnemySideR(Vec2 pos)
+{
+	ShotEnemySideR* pShot = new ShotEnemySideR;
+	pShot->setHandle(m_hShotGraphic1);
+	pShot->start(pos);
+
+	pShot->setPlayerShot(false);		//撃っているのが敵か味方か判別
+
+	m_pShotVt.push_back(pShot);
+
+	return true;
+}
 //-------------------------------------------------
 
 bool SceneMain::createVillainFirst(Vec2 pos)
 {
 	VillainFirst* pVillain = new VillainFirst;
 	pVillain->setHandle(m_hEnemyGraphic);
+	pVillain->setMain(this);
+	pVillain->start(pos);
+	m_villainVt.push_back(pVillain);
+
+	return true;
+}
+
+bool SceneMain::createVillainSecond(Vec2 pos)
+{
+	villainSecond* pVillain = new villainSecond;
+	pVillain->setHandle(m_VillainGraphic);
 	pVillain->setMain(this);
 	pVillain->start(pos);
 	m_villainVt.push_back(pVillain);

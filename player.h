@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Vec2.h"
-#include "enemy.h"
+#include "villainBase.h"
+
 class SceneMain;
 
 class Player
@@ -35,7 +36,7 @@ public:
 	// •`‰æ
 	void draw();
 
-	bool isCol(Enemy& enemy);
+	bool isCol(VillainBase& villainBase);
 
 	bool isColShot(ShotBase& shotBase);
 

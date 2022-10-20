@@ -1,4 +1,4 @@
-#include "villainFirst.h"
+#include "villainSecond.h"
 #include "game.h"
 #include "DxLib.h"
 #include "shot.h"
@@ -7,11 +7,11 @@
 
 namespace
 {
-	constexpr float kSizeX = 89.0f;
-	constexpr float kSizeY = 89.0f;
+	constexpr float kSizeX = 48.0f;
+	constexpr float kSizeY = 48.0f;
 }
 
-VillainFirst::VillainFirst()
+villainSecond::villainSecond()
 {
 	m_handle = -1;
 	m_pMain = nullptr;
@@ -22,16 +22,14 @@ VillainFirst::VillainFirst()
 	m_size.y = kSizeY;
 }
 
-void VillainFirst::start(Vec2 pos)
+void villainSecond::start(Vec2 pos)
 {
 	VillainBase::start(pos);
 
-	m_time = 120;
-	m_stopTime = 180;
-	m_outTime = 1080;
+	m_time = 1000;
 }
 
-void VillainFirst::update()
+void villainSecond::update()
 {
 	//死んでいたら画面外に飛ばす
 	if (m_isDead)
@@ -45,7 +43,7 @@ void VillainFirst::update()
 	m_count++;		//カウント
 
 	//ゲーム開始時画面上から出現し決められた時間になるとその場所で止まる
-	if (m_time < m_count && m_count < m_stopTime)
+	if (m_count > 180)
 	{
 		m_pos.y += 2;
 	}
@@ -59,37 +57,27 @@ void VillainFirst::update()
 		m_count == 480 || m_count == 483 || m_count == 486 ||
 		m_count == 540 || m_count == 543 || m_count == 546 ||
 
-		m_count == 640 || m_count == 643 || m_count == 646 || 
-		m_count == 700 || m_count == 703 || m_count == 706 || 
+		m_count == 640 || m_count == 643 || m_count == 646 ||
+		m_count == 700 || m_count == 703 || m_count == 706 ||
 		m_count == 760 || m_count == 763 || m_count == 766)
 	{
-		if (m_pMain->createShotEnemy1way(getPos()))
-		{
-		}
-		if (m_pMain->createShotEnemy2way(getPos()))
-		{
-		}
-		if (m_pMain->createShotEnemy3way(getPos()))
+		if (m_pMain->createShotEnemySideR(getPos()))
 		{
 		}
 	}
-	//決められた時間外になると画面外に消えていく
-	else if (m_count > m_outTime)
+
+	//範囲外になると消える
+	if (m_pos.y > 480 + kSizeY)
 	{
-		m_pos.y -= 2;
-		if (m_pos.y < -40)
-		{
-			m_isDead = true;
-		}
+		m_isDead = true;
 	}
 }
 
-void VillainFirst::draw()
+void villainSecond::draw()
 {
 	//死んでいたら描画しない
 	if (!m_isDead)
 	{
 		DrawGraphF(m_pos.x, m_pos.y, m_handle, true);
 	}
-	//DrawFormatString(460, 20, GetColor(255, 255, 255), "カウント数:%d", m_count);
 }

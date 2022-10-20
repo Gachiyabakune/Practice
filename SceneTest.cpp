@@ -26,4 +26,6 @@ SceneBase* SceneTest::update()
 void SceneTest::draw()
 {
 	DrawString(0, m_textPosY, "ルール説明", GetColor(255, 255, 255));
+	DrawString(0, m_textPosY+20, "敵を3体倒せ", GetColor(255, 255, 255));
+	DrawString(0, m_textPosY+40, "制限時間が切れるか、ライフがなくなるとゲームオーバー", GetColor(255, 255, 255));
 }

@@ -13,9 +13,11 @@ namespace
 VillainBase::VillainBase()
 {
 	m_handle = -1;
-	m_pos.x = 100.0f;
-	m_pos.y = 100.0f;
-
+	//m_pos.x = 185.5f;		//画面の半分  - キャラのサイズの半分
+	//m_pos.y = -100;
+	m_pos.x = 0;
+	m_pos.y = 0;
+ 
 	m_vec.x = 0.0f;
 	m_vec.y = 0.0f;
 

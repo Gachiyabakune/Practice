@@ -33,4 +33,5 @@ void SceneTitle::draw()
 	DrawString(0, m_textPosY, "タイトル", GetColor(255, 255, 255));
 	DrawString(0, m_textPosY + 20, "ゲームスタート->Aボタン", GetColor(255, 255, 255));
 	DrawString(0, m_textPosY+40, "オプション->STARTボタン", GetColor(255, 255, 255));
+	DrawString(0, m_textPosY+60, "Xボタンでゲームスタート", GetColor(255, 255, 255));
 }

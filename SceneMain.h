@@ -3,7 +3,6 @@
 #include <vector>
 #include "player.h"
 #include "ShotBase.h"
-#include "enemy.h"
 #include "backImg.h"
 #include "villainBase.h"
 #include "Vec2.h"
@@ -34,10 +33,13 @@ public:
 	bool createShotEnemy1way(Vec2 pos);
 	bool createShotEnemy2way(Vec2 pos);
 	bool createShotEnemy3way(Vec2 pos);
+	bool createShotEnemySideR(Vec2 pos);
 
+	//“G‚Ì¶¬
 	bool createVillainFirst(Vec2 pos);
+	bool createVillainSecond(Vec2 pos);
 
-	Vec2 getPos() const { return m_pos; }
+	//Vec2 getPos() const { return m_pos; }
 	virtual bool isEnd() { return m_isEnd; }
 private:
 
@@ -50,8 +52,7 @@ private:
 	
 	// ƒvƒŒƒCƒ„[
 	Player m_player;
-	//“G
-	Enemy m_enemy;
+	
 	//”wŒi
 	Back m_backImg;
 
@@ -71,11 +72,12 @@ private:
 	int m_RepelNum;
 
 	int m_frame;		//Œv‘ª—p‚Ì•Ï”
-	int m_hitFrame;   //–³“GƒtƒŒ[ƒ€
+	int m_hitFrameP;   //–³“GƒtƒŒ[ƒ€
+	int m_hitFrameV;
 
 	int m_enedFrame;
 
 	bool m_isEnd;
 
-	Vec2 m_pos;
+	float x,y;
 };

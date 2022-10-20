@@ -48,7 +48,7 @@ void ShotBase::draw()
 	//
 	if (m_isPlayer)
 	{
-		DrawGraphF(m_pos.x + 8, m_pos.y, m_handle, true);	//弾がキャラの真ん中から出るように調整
+		DrawGraphF(m_pos.x + 8, m_pos.y-32, m_handle, true);	//弾がキャラの真ん中から出るように調整
 	}
 	else if (!m_isPlayer)
 	{

@@ -152,11 +152,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="backImg.cpp" />
-    <ClCompile Include="enemy.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="SceneBase.cpp" />
     <ClCompile Include="SceneEnd.cpp" />
+    <ClCompile Include="SceneGameOver.cpp" />
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneTest.cpp" />
@@ -168,19 +168,21 @@
     <ClCompile Include="ShotEnemy.cpp" />
     <ClCompile Include="shotEnemy1way.cpp" />
     <ClCompile Include="ShotEnemy2way.cpp" />
+    <ClCompile Include="ShotEnemySideR.cpp" />
     <ClCompile Include="ShotNormal.cpp" />
     <ClCompile Include="vec2.cpp" />
     <ClCompile Include="villain.cpp" />
     <ClCompile Include="villainBase.cpp" />
     <ClCompile Include="villainFirst.cpp" />
+    <ClCompile Include="villainSecond.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="backImg.h" />
-    <ClInclude Include="enemy.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="SceneEnd.h" />
+    <ClInclude Include="SceneGameOver.h" />
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SceneTest.h" />
@@ -192,11 +194,13 @@
     <ClInclude Include="ShotEnemy1way.h" />
     <ClInclude Include="ShotEnemy2way.h" />
     <ClInclude Include="ShotEnemy3way.h" />
+    <ClInclude Include="ShotEnemySideR.h" />
     <ClInclude Include="ShotNormal.h" />
     <ClInclude Include="vec2.h" />
     <ClInclude Include="villain.h" />
     <ClInclude Include="villainBase.h" />
     <ClInclude Include="villainFirst.h" />
+    <ClInclude Include="villainSecond.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

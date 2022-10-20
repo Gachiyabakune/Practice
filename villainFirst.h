@@ -32,8 +32,6 @@ public:
 	virtual void setDeads(bool isDead) { m_isDead = isDead; }
 
 private:
-	int m_handle;
-
 	//SceneMainのポインタ
 	SceneMain* m_pMain;
 	//int m_shotInterval;
@@ -41,5 +39,4 @@ private:
 	int m_count;
 	//出現、停止、帰還
 	int m_time, m_stopTime, m_outTime;
-
 };
