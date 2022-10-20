@@ -24,5 +24,7 @@ private:
 	int m_textPosY;
 	int m_textVecY;
 
+	int m_handle;
+
 	bool m_isEnd;
 };

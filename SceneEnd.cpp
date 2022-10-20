@@ -3,12 +3,21 @@
 #include "DxLib.h"
 #include "SceneMain.h"
 
+
+//namespace
+//{
+//	const char* const kPlayerGraphicFilename = "data/end.png";
+//}
+
 void SceneEnd::init()
 {
 	m_textPosY = 0;
 	m_textVecY = 4;
 
+	m_handle = 0;
 	m_isEnd = false;
+
+	m_handle = LoadGraph("data/end.png");
 }
 
 SceneBase* SceneEnd::update()
@@ -25,5 +34,6 @@ SceneBase* SceneEnd::update()
 
 void SceneEnd::draw()
 {
-	DrawString(0, m_textPosY, "エンド画面", GetColor(255, 255, 255));
+	DrawString(0, m_textPosY, "ゲームクリア", GetColor(255, 255, 255));
+	DrawGraphF(0, 0, m_handle, false);
 }
