@@ -42,6 +42,7 @@ void villainSecond::update()
 
 	m_count++;		//カウント
 
+
 	//ゲーム開始時画面上から出現し決められた時間になるとその場所で止まる
 	if (m_count > 180)
 	{
